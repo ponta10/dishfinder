@@ -1,6 +1,5 @@
-import React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
-import { Rating } from '.'; // Ratingコンポーネントの正しいパスを指定してください
+import type { Meta, StoryObj } from '@storybook/react'
+import { Rating } from '.'
 
 const meta: Meta = {
   title: 'Example/Rating',
@@ -14,32 +13,32 @@ const meta: Meta = {
       description: 'Rating value between 0 to 5',
     },
   },
-};
+}
 
-export default meta;
+export default meta
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
     value: 3.5,
   },
-};
+}
 
 export const FullRating: Story = {
   args: {
     value: 5,
   },
-};
+}
 
 export const NoRating: Story = {
   args: {
     value: 0,
   },
-};
+}
 
 export const PartialRating: Story = {
   args: {
     value: 2.3,
   },
-};
+}

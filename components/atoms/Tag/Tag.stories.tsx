@@ -7,11 +7,6 @@ const meta: Meta = {
   parameters: {
     layout: 'centered',
   },
-  argTypes: {
-    text: { control: 'text' },
-    bgColor: { control: 'color' },
-    onClick: { action: 'clicked' },
-  },
 }
 
 export default meta

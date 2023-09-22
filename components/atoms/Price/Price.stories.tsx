@@ -7,10 +7,6 @@ const meta: Meta = {
   parameters: {
     layout: 'centered',
   },
-  argTypes: {
-    lunch: { control: 'text' },
-    dinner: { control: 'text' },
-  },
 }
 
 export default meta
