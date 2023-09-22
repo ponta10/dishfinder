@@ -1,7 +1,8 @@
 import React from 'react'
+import { Control, Controller } from 'react-hook-form'
 import styled from 'styled-components'
 
-interface SelectBoxProps {
+export interface SelectProps {
   name?: string
   label?: string
   items: { value: string | number; label: string }[]
@@ -11,6 +12,7 @@ interface SelectBoxProps {
   size?: 'small' | 'medium' | 'large'
   error?: boolean
   helperText?: string
+  control: Control<any>
 }
 
 interface StyledSelectProps {
@@ -41,7 +43,7 @@ const StyledHelperText = styled.div<{ error?: boolean }>`
   margin-top: 4px;
 `
 
-export const Select: React.FC<SelectBoxProps> = ({
+export const Select: React.FC<SelectProps> = ({
   name,
   label,
   items,
@@ -51,25 +53,34 @@ export const Select: React.FC<SelectBoxProps> = ({
   size = 'medium',
   error = false,
   helperText,
+  control,
 }) => {
   return (
     <div>
       {label && <StyledLabel htmlFor={name}>{label}</StyledLabel>}
-      <StyledSelect
-        name={name}
-        id={name}
-        disabled={disabled}
-        onChange={onChange}
+      <Controller
+        name={name!}
+        control={control}
         defaultValue={defaultValue}
-        size={size}
-        error={error}
-      >
-        {items.map((item) => (
-          <option key={item.value} value={item.value}>
-            {item.label}
-          </option>
-        ))}
-      </StyledSelect>
+        render={({ field }) => (
+          <StyledSelect
+            {...field}
+            onChange={(e) => {
+              field.onChange(e)
+              if (onChange) onChange(e)
+            }}
+            disabled={disabled}
+            size={size}
+            error={error}
+          >
+            {items.map((item) => (
+              <option key={item.value} value={item.value}>
+                {item.label}
+              </option>
+            ))}
+          </StyledSelect>
+        )}
+      />
       {helperText && (
         <StyledHelperText error={error}>{helperText}</StyledHelperText>
       )}

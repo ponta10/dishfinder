@@ -1,12 +1,15 @@
 import React from 'react'
+import { Control, Controller } from 'react-hook-form'
 import styled from 'styled-components'
 
-interface CheckboxProps {
+export interface CheckboxProps {
   id: string
+  name: string
   label: string
   checked?: boolean
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   disabled?: boolean
+  control: Control<any>
 }
 
 const CheckboxContainer = styled.div`
@@ -25,11 +28,24 @@ const StyledLabel = styled.label`
   cursor: pointer;
 `
 
-export const Checkbox: React.FC<CheckboxProps> = ({ id, label, ...props }) => {
+export const Checkbox: React.FC<CheckboxProps> = ({
+  id,
+  label,
+  control,
+  name,
+  ...props
+}) => {
   return (
-    <CheckboxContainer>
-      <StyledCheckbox id={id} {...props} />
-      <StyledLabel htmlFor={id}>{label}</StyledLabel>
-    </CheckboxContainer>
+    <Controller
+      name={name}
+      control={control}
+      defaultValue={false}
+      render={({ field }) => (
+        <CheckboxContainer>
+          <StyledCheckbox id={id} {...field} {...props} />
+          <StyledLabel htmlFor={id}>{label}</StyledLabel>
+        </CheckboxContainer>
+      )}
+    />
   )
 }

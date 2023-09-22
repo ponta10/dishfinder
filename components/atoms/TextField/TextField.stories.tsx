@@ -1,8 +1,10 @@
+import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { TextField } from '.'
+import { TextField, TextFieldProps } from '.' // 適切なパスを指定してください
+import { useForm } from 'react-hook-form'
 
 const meta: Meta = {
-  title: 'Example/TextField',
+  title: 'Components/TextField',
   component: TextField,
   parameters: {
     layout: 'centered',
@@ -33,25 +35,31 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
-  args: {
-    label: 'Default TextField',
-    placeholder: 'Enter text...',
-  },
+export const Default: Story = (args: TextFieldProps) => {
+  const { control } = useForm()
+  return <TextField {...args} control={control} />
+}
+Default.args = {
+  label: 'Default TextField',
+  placeholder: 'Enter text...',
 }
 
-export const PasswordField: Story = {
-  args: {
-    label: 'Password',
-    type: 'password',
-    placeholder: 'Enter password...',
-  },
+export const PasswordField: Story = (args: TextFieldProps) => {
+  const { control } = useForm()
+  return <TextField {...args} control={control} />
+}
+PasswordField.args = {
+  label: 'Password',
+  type: 'password',
+  placeholder: 'Enter password...',
 }
 
-export const ErrorField: Story = {
-  args: {
-    label: 'Error Field',
-    error: true,
-    helperText: 'This field has an error',
-  },
+export const ErrorField: Story = (args: TextFieldProps) => {
+  const { control } = useForm()
+  return <TextField {...args} control={control} />
+}
+ErrorField.args = {
+  label: 'Error Field',
+  error: true,
+  helperText: 'This field has an error',
 }

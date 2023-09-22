@@ -1,51 +1,47 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import { Checkbox } from '.'
+// Checkbox.stories.tsx
+
+import React from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
+import { Checkbox, CheckboxProps } from '.'; // 適切なパスを指定してください
+import { useForm } from 'react-hook-form';
 
 const meta: Meta = {
-  title: 'Example/Checkbox',
+  title: 'Components/Checkbox',
   component: Checkbox,
-  parameters: {
-    layout: 'centered',
-  },
-  argTypes: {
-    id: { control: 'text' },
-    label: { control: 'text' },
-    checked: { control: 'boolean' },
-    disabled: { control: 'boolean' },
-  },
-}
+};
 
-export default meta
+export default meta;
 
-type Story = StoryObj<typeof meta>
+type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {
-    id: 'defaultCheckbox',
-    label: 'Default Checkbox',
-  },
-}
+export const Default: Story = (args: CheckboxProps) => {
+  const { control } = useForm();
+  return <Checkbox {...args} control={control} />;
+};
+Default.args = {
+  id: 'defaultCheckbox',
+  label: 'Default Checkbox',
+  name: 'defaultCheckbox',
+};
 
-export const Checked: Story = {
-  args: {
-    id: 'checkedCheckbox',
-    label: 'Checked Checkbox',
-    checked: true,
-  },
-}
-
-export const DefaultChecked: Story = {
-  args: {
-    id: 'checkedCheckbox',
-    label: 'Checked Checkbox',
+export const DefaultChecked: Story = (args: CheckboxProps) => {
+    const { control } = useForm();
+    return <Checkbox {...args} control={control} />;
+  };
+  DefaultChecked.args = {
+    id: 'defaultCheckedCheckbox',
+    label: 'DefaultChecked Checkbox',
+    name: 'defaultCheckedCheckbox',
     defaultChecked: true,
-  },
-}
+};
 
-export const Disabled: Story = {
-  args: {
-    id: 'disabledCheckbox',
-    label: 'Disabled Checkbox',
-    disabled: true,
-  },
-}
+export const Disabled: Story = (args: CheckboxProps) => {
+  const { control } = useForm();
+  return <Checkbox {...args} control={control} />;
+};
+Disabled.args = {
+  id: 'disabledCheckbox',
+  label: 'Disabled Checkbox',
+  name: 'disabledCheckbox',
+  disabled: true,
+};

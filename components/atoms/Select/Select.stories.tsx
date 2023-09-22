@@ -1,23 +1,17 @@
+import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { Select } from '.'
+import { Select, SelectProps } from '.' // 適切なパスを指定してください
+import { useForm } from 'react-hook-form'
 
 const meta: Meta = {
-  title: 'Example/Select',
+  title: 'Components/Select',
   component: Select,
   parameters: {
     layout: 'centered',
   },
   argTypes: {
-    name: { control: 'text' },
-    label: { control: 'text' },
-    items: { control: 'object' },
-    disabled: { control: 'boolean' },
-    defaultValue: { control: 'text' },
-    size: {
-      control: { type: 'select', options: ['small', 'medium', 'large'] },
-    },
-    error: { control: 'boolean' },
-    helperText: { control: 'text' },
+    // ... 他の argTypes
+    onChange: { action: 'changed' },
   },
 }
 
@@ -25,26 +19,28 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
-  args: {
-    label: 'Default Select',
-    items: [
-      { value: 'option1', label: 'Option 1' },
-      { value: 'option2', label: 'Option 2' },
-      { value: 'option3', label: 'Option 3' },
-    ],
-  },
+export const Default: Story = (args: SelectProps) => {
+  const { control } = useForm()
+  return <Select {...args} control={control} />
+}
+Default.args = {
+  label: 'Default Select',
+  items: [
+    { value: 'option1', label: 'Option 1' },
+    { value: 'option2', label: 'Option 2' },
+  ],
 }
 
-export const WithError: Story = {
-  args: {
-    label: 'Select with Error',
-    items: [
-      { value: 'option1', label: 'Option 1' },
-      { value: 'option2', label: 'Option 2' },
-      { value: 'option3', label: 'Option 3' },
-    ],
-    error: true,
-    helperText: 'This field has an error',
-  },
+export const WithError: Story = (args: SelectProps) => {
+  const { control } = useForm()
+  return <Select {...args} control={control} />
+}
+WithError.args = {
+  label: 'Error Select',
+  error: true,
+  helperText: 'This field has an error',
+  items: [
+    { value: 'option1', label: 'Option 1' },
+    { value: 'option2', label: 'Option 2' },
+  ],
 }

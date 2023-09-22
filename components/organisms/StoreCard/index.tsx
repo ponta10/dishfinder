@@ -11,6 +11,7 @@ interface StoreCardProps {
   dinner: string
   name: string
   link: string
+  width?: string | number
 }
 
 const Container = styled.div`
@@ -34,9 +35,10 @@ export const StoreCard: React.FC<StoreCardProps> = ({
   dinner,
   name,
   link,
+  width,
 }) => {
   return (
-    <Card width="70%">
+    <Card width={width}>
       <Container>
         <Rating value={tabelog} size={40} />
         <StoreLink href={link}>{name}</StoreLink>

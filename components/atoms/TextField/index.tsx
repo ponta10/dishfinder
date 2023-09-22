@@ -1,7 +1,8 @@
 import React from 'react'
+import { Control, Controller } from 'react-hook-form'
 import styled from 'styled-components'
 
-interface TextFieldProps {
+export interface TextFieldProps {
   type?: 'text' | 'password' | 'email' | 'number'
   label?: string
   name?: string
@@ -14,9 +15,14 @@ interface TextFieldProps {
   InputProps?: React.HTMLProps<HTMLInputElement>
   readOnly?: boolean
   width?: string | number
+  control: Control<any>
 }
 
-const StyledInput = styled.input<TextFieldProps>`
+const StyledInput = styled.input<{
+  width?: string | number
+  size?: string
+  error?: boolean
+}>`
   width: ${(props) =>
     typeof props.width === 'number'
       ? `${props.width}px`
@@ -33,7 +39,7 @@ const StyledLabel = styled.label`
   margin-bottom: 8px;
 `
 
-const StyledHelperText = styled.div<TextFieldProps>`
+const StyledHelperText = styled.div<{ error?: boolean }>`
   color: ${(props) => (props.error ? 'red' : '#666')};
   font-size: 12px;
   margin-top: 4px;
@@ -44,19 +50,25 @@ export const TextField: React.FC<TextFieldProps> = ({
   multiline = false,
   rows = 3,
   helperText,
+  control,
   ...props
 }) => {
   return (
     <div>
       {label && <StyledLabel>{label}</StyledLabel>}
-      {multiline ? (
-        // <textarea rows={rows} {...(props as any)} />
-        <textarea rows={rows} {...props} />
-      ) : (
-        <StyledInput {...props} />
-      )}
+      <Controller
+        name={name!}
+        control={control}
+        render={({ field }) =>
+          multiline ? (
+            <textarea rows={rows} {...field} {...props} />
+          ) : (
+            <StyledInput {...field} {...props} />
+          )
+        }
+      />
       {helperText && (
-        <StyledHelperText {...props}>{helperText}</StyledHelperText>
+        <StyledHelperText error={props.error}>{helperText}</StyledHelperText>
       )}
     </div>
   )
