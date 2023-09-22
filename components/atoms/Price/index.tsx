@@ -7,7 +7,14 @@ import moon from '../../../public/moon.png'
 interface PriceProps {
   lunch: string
   dinner: string
+  flex?: boolean
 }
+
+const Wrapper = styled.div<{ flex?: boolean }>`
+  display: ${(props) => (props.flex ? 'flex' : 'block')};
+  alignitems: center;
+  gap: 24px;
+`
 
 const Container = styled.div`
   display: flex;
@@ -19,9 +26,9 @@ const Amount = styled.p`
   font-size: 16px;
 `
 
-export const Price: React.FC<PriceProps> = ({ lunch, dinner }) => {
+export const Price: React.FC<PriceProps> = ({ lunch, dinner, flex }) => {
   return (
-    <div>
+    <Wrapper flex={flex}>
       <Container>
         <Image width={40} height={40} src={sun} alt="太陽"></Image>
         <Amount>{lunch}</Amount>
@@ -30,6 +37,6 @@ export const Price: React.FC<PriceProps> = ({ lunch, dinner }) => {
         <Image width={40} height={40} src={moon} alt="月"></Image>
         <Amount>{dinner}</Amount>
       </Container>
-    </div>
+    </Wrapper>
   )
 }

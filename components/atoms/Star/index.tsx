@@ -25,14 +25,15 @@ const FilledStar = styled.div<StarProps>`
 
 interface RatingStarProps {
   value: number // 0 to 1
+  size?: number
 }
 
-export const RatingStar: React.FC<RatingStarProps> = ({ value }) => {
+export const RatingStar: React.FC<RatingStarProps> = ({ value, size }) => {
   return (
     <StarContainer>
-      <FaStar size={24} />
+      <FaStar size={size} />
       <FilledStar fillPercentage={value}>
-        <FaStar size={24} />
+        <FaStar size={size} />
       </FilledStar>
     </StarContainer>
   )

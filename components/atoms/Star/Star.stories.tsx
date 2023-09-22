@@ -32,6 +32,7 @@ export const Default: Story = {
 export const EmptyStar: Story = {
   args: {
     value: 0,
+    size: 40,
   },
 }
 

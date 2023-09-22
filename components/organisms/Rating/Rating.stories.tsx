@@ -28,6 +28,7 @@ export const Default: Story = {
 export const FullRating: Story = {
   args: {
     value: 5,
+    size: 40,
   },
 }
 

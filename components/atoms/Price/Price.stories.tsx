@@ -31,5 +31,6 @@ export const CheapMeal: Story = {
   args: {
     lunch: '-',
     dinner: '10,000~15,000',
+    flex: true,
   },
 }

@@ -4,6 +4,7 @@ import { RatingStar } from '../../atoms/Star' // RatingStarコンポーネント
 
 interface RatingProps {
   value: number // 0 to 5
+  size?: number
 }
 
 const RatingContainer = styled.div`
@@ -20,7 +21,7 @@ const ValueText = styled.span`
   margin-top: 4px;
 `
 
-export const Rating: React.FC<RatingProps> = ({ value }) => {
+export const Rating: React.FC<RatingProps> = ({ value, size }) => {
   const fullStars = Math.floor(value)
   const partialStar = value - fullStars
   const emptyStars = 5 - Math.ceil(value)
@@ -29,11 +30,11 @@ export const Rating: React.FC<RatingProps> = ({ value }) => {
     <RatingContainer>
       <StarsContainer>
         {[...Array(fullStars)].map((_, index) => (
-          <RatingStar key={index} value={1} />
+          <RatingStar key={index} value={1} size={size} />
         ))}
-        {partialStar > 0 && <RatingStar value={partialStar} />}
+        {partialStar > 0 && <RatingStar value={partialStar} size={size} />}
         {[...Array(emptyStars)].map((_, index) => (
-          <RatingStar key={`empty-${index}`} value={0} />
+          <RatingStar key={`empty-${index}`} value={0} size={size} />
         ))}
       </StarsContainer>
       <ValueText>{value.toFixed(1)}</ValueText>
