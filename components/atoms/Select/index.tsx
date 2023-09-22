@@ -13,16 +13,21 @@ export interface SelectProps {
   error?: boolean
   helperText?: string
   control: Control<any>
+  width?: string | number
 }
 
 interface StyledSelectProps {
   size?: 'small' | 'medium' | 'large'
   error?: boolean
   disabled?: boolean
+  width?: string | number
 }
 
 const StyledSelect = styled.select<StyledSelectProps>`
-  width: 100%;
+width: ${(props) =>
+    typeof props.width === 'number'
+      ? `${props.width}px`
+      : props.width || '100%'};
   padding: ${(props) =>
     props.size === 'small' ? '8px' : props.size === 'large' ? '16px' : '12px'};
   border: ${(props) => (props.error ? '2px solid red' : '2px solid #ccc')};
@@ -53,10 +58,11 @@ export const Select: React.FC<SelectProps> = ({
   size = 'medium',
   error = false,
   helperText,
+  width,
   control,
 }) => {
   return (
-    <div>
+<div>
       {label && <StyledLabel htmlFor={name}>{label}</StyledLabel>}
       <Controller
         name={name!}
@@ -66,12 +72,13 @@ export const Select: React.FC<SelectProps> = ({
           <StyledSelect
             {...field}
             onChange={(e) => {
-              field.onChange(e)
-              if (onChange) onChange(e)
+                field.onChange(e);
+                if (onChange) onChange(e);
             }}
             disabled={disabled}
             size={size}
             error={error}
+            width={width}
           >
             {items.map((item) => (
               <option key={item.value} value={item.value}>

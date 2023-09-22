@@ -16,7 +16,7 @@ interface FormProps<T extends FieldValues> {
   onSubmit: SubmitHandler<T>
 }
 
-const Form: React.FC<FormProps<Record<string, any>>> = ({
+export const Form: React.FC<FormProps<Record<string, any>>> = ({
   children,
   options,
   schema,
@@ -31,5 +31,3 @@ const Form: React.FC<FormProps<Record<string, any>>> = ({
 
   return <form onSubmit={handleSubmit(onSubmit)}>{children(methods)}</form>
 }
-
-export default Form

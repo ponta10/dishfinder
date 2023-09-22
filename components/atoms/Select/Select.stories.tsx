@@ -21,7 +21,7 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = (args: SelectProps) => {
   const { control } = useForm()
-  return <Select {...args} control={control} />
+  return <Select {...args} name="defaultSelect" control={control} />
 }
 Default.args = {
   label: 'Default Select',
@@ -33,8 +33,9 @@ Default.args = {
 
 export const WithError: Story = (args: SelectProps) => {
   const { control } = useForm()
-  return <Select {...args} control={control} />
+  return <Select {...args} name="errorSelect" control={control} />
 }
+
 WithError.args = {
   label: 'Error Select',
   error: true,

@@ -15,11 +15,13 @@ export interface TextFieldProps {
   InputProps?: React.HTMLProps<HTMLInputElement>
   readOnly?: boolean
   width?: string | number
+  height?: string | number
   control: Control<any>
 }
 
 const StyledInput = styled.input<{
   width?: string | number
+  height?: string | number
   size?: string
   error?: boolean
 }>`
@@ -27,11 +29,16 @@ const StyledInput = styled.input<{
     typeof props.width === 'number'
       ? `${props.width}px`
       : props.width || '100%'};
+  height: ${(props) =>
+    typeof props.height === 'number'
+      ? `${props.height}px`
+      : props.height || 'auto'};
   padding: ${(props) =>
     props.size === 'small' ? '8px' : props.size === 'large' ? '16px' : '12px'};
   border: ${(props) => (props.error ? '2px solid red' : '2px solid #ccc')};
   border-radius: 4px;
   box-sizing: border-box;
+  height: 2;
 `
 
 const StyledLabel = styled.label`

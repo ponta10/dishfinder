@@ -3,7 +3,7 @@ import { Control, Controller } from 'react-hook-form'
 import styled from 'styled-components'
 
 export interface CheckboxProps {
-  id: string
+  id?: string
   name: string
   label: string
   checked?: boolean
@@ -19,9 +19,13 @@ const CheckboxContainer = styled.div`
 
 const StyledCheckbox = styled.input.attrs({ type: 'checkbox' })<{
   disabled?: boolean
+  checked?: boolean
 }>`
   margin-right: 8px;
   cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
+
+  /* チェックが付いている場合のスタイルを追加 */
+  accent-color: #ffa234;
 `
 
 const StyledLabel = styled.label`
@@ -35,6 +39,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   name,
   ...props
 }) => {
+  const checkboxId = id || name
   return (
     <Controller
       name={name}
@@ -42,8 +47,8 @@ export const Checkbox: React.FC<CheckboxProps> = ({
       defaultValue={false}
       render={({ field }) => (
         <CheckboxContainer>
-          <StyledCheckbox id={id} {...field} {...props} />
-          <StyledLabel htmlFor={id}>{label}</StyledLabel>
+          <StyledCheckbox id={checkboxId} {...field} {...props} />
+          <StyledLabel htmlFor={checkboxId}>{label}</StyledLabel>
         </CheckboxContainer>
       )}
     />
