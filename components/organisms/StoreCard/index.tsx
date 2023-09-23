@@ -24,8 +24,13 @@ const Container = styled.div`
 const StoreLink = styled.a`
   text-decoration: none;
   color: #66a3e0;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
+
+  &:hover {
+    text-decoration: underline;
+    color: #ffa234;
+  }
 `
 
 export const StoreCard: React.FC<StoreCardProps> = ({
@@ -41,7 +46,9 @@ export const StoreCard: React.FC<StoreCardProps> = ({
     <Card width={width}>
       <Container>
         <Rating value={tabelog} size={40} />
-        <StoreLink href={link}>{name}</StoreLink>
+        <StoreLink href={link} target="_blank" rel="noopener noreferrer">
+          {name}
+        </StoreLink>
         <Price lunch={lunch} dinner={dinner} />
         <Rating value={google} size={40} />
       </Container>

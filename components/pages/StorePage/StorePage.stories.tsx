@@ -1,13 +1,10 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { SearchBox } from '.'
+import { StorePage } from '.'
 
 const meta: Meta = {
-  title: 'Components/SearchBox',
-  component: SearchBox,
-  parameters: {
-    layout: 'centered',
-  },
+  title: 'Components/StorePage',
+  component: StorePage,
 }
 
 export default meta
@@ -15,5 +12,5 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  render: () => <SearchBox />,
+  render: () => <StorePage />,
 }
