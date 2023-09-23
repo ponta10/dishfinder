@@ -19,7 +19,7 @@ export interface SelectProps {
 
 interface StyledSelectProps {
   size?: 'small' | 'medium' | 'large'
-  error?: boolean
+  $error?: boolean
   disabled?: boolean
   width?: string | number
   value?: string | number
@@ -32,7 +32,7 @@ const StyledSelect = styled.select<StyledSelectProps>`
       : props.width || '100%'};
   padding: ${(props) =>
     props.size === 'small' ? '8px' : props.size === 'large' ? '16px' : '12px'};
-  border: ${(props) => (props.error ? '2px solid red' : '2px solid #ccc')};
+  border: ${(props) => (props.$error ? '2px solid red' : '2px solid #ccc')};
   border-radius: 4px;
   box-sizing: border-box;
   font-size: 1rem;
@@ -45,8 +45,8 @@ const StyledLabel = styled.label`
   margin-bottom: 8px;
 `
 
-const StyledHelperText = styled.div<{ error?: boolean }>`
-  color: ${(props) => (props.error ? 'red' : '#666')};
+const StyledHelperText = styled.div<{ $error?: boolean }>`
+  color: ${(props) => (props.$error ? 'red' : '#666')};
   font-size: 12px;
   margin-top: 4px;
 `
@@ -82,7 +82,7 @@ export const Select: React.FC<SelectProps> = ({
             }}
             disabled={disabled}
             size={size}
-            error={error}
+            $error={error}
             width={width}
           >
             <option value="" disabled>
@@ -97,7 +97,7 @@ export const Select: React.FC<SelectProps> = ({
         )}
       />
       {helperText && (
-        <StyledHelperText error={error}>{helperText}</StyledHelperText>
+        <StyledHelperText $error={error}>{helperText}</StyledHelperText>
       )}
     </>
   )

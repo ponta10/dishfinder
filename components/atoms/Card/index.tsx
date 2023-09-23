@@ -2,13 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 
 interface CardProps {
-  bgColor?: string
+  bgcolor?: string
   width?: string | number
   children?: React.ReactNode
 }
 
-const StyledCard = styled.div<CardProps>`
-  background-color: ${(props) => props.bgColor || '#fff'};
+const StyledCard = styled.div<{ $bgcolor?: string; width?: string | number }>`
+  background-color: ${(props) => props.$bgcolor || '#fff'};
   width: ${(props) =>
     typeof props.width === 'number'
       ? `${props.width}px`
@@ -18,9 +18,9 @@ const StyledCard = styled.div<CardProps>`
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 `
 
-export const Card: React.FC<CardProps> = ({ bgColor, width, children }) => {
+export const Card: React.FC<CardProps> = ({ bgcolor, width, children }) => {
   return (
-    <StyledCard bgColor={bgColor} width={width}>
+    <StyledCard $bgcolor={bgcolor} width={width}>
       {children}
     </StyledCard>
   )

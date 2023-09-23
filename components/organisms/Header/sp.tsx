@@ -3,6 +3,10 @@ import styled from 'styled-components'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { Button } from '@/components/atoms/Button'
 
+interface HeaderProps {
+    setSearch: (value: boolean) => void;
+}
+
 const Container = styled.div`
   background-color: #fff;
   position: fixed;
@@ -33,15 +37,17 @@ const SearchTextArea = styled.div`
   gap: 12px;
 `
 
-export const Header = () => {
+export const Header: React.FC<HeaderProps> = ({
+    setSearch
+}) => {
   return (
     <Container>
-      <Wrapper>
+      <Wrapper onClick={() => setSearch(true)}>
         <SearchTextArea>
           <AiOutlineSearch size={24} />
           <p>渋谷 イタリアン</p>
         </SearchTextArea>
-        <Button bgColor="transparent" textColor="#FFA234" text="変更" />
+        <Button bgcolor="transparent" textcolor="#FFA234" text="変更" />
       </Wrapper>
     </Container>
   )

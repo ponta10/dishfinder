@@ -12,8 +12,8 @@ interface PriceProps {
   fontSize?: string
 }
 
-const Container = styled.div<{ flex?: boolean }>`
-  display: ${(props) => (props.flex ? 'flex' : 'block')};
+const Container = styled.div<{ $flex?: boolean }>`
+  display: ${(props) => (props.$flex ? 'flex' : 'block')};
   alignitems: center;
   gap: 12px;
 `
@@ -37,7 +37,7 @@ export const Price: React.FC<PriceProps> = ({
   fontSize,
 }) => {
   return (
-    <Container flex={flex}>
+    <Container $flex={flex}>
       <Wrapper>
         <Image width={iconSize} height={iconSize} src={sun} alt="太陽"></Image>
         <Amount fontSize={fontSize}>{lunch}</Amount>

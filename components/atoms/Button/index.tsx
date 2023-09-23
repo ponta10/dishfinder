@@ -2,19 +2,24 @@ import React from 'react'
 import styled from 'styled-components'
 
 export interface ButtonProps {
-  bgColor?: string
-  textColor?: string
+  bgcolor?: string
+  textcolor?: string
   text?: string
   width?: string | number
-  fontSize?: string | number
+  fontSize?: string
   type?: 'button' | 'submit' | 'reset'
   disabled?: boolean
   onClick?: () => void
 }
 
-const StyledButton = styled.button<ButtonProps>`
-  background-color: ${(props) => props.bgColor || 'blue'};
-  color: ${(props) => props.textColor || 'white'};
+const StyledButton = styled.button<{
+  $bgcolor?: string
+  $textcolor?: string
+  width?: string | number
+  fontSize?: string
+}>`
+  background-color: ${(props) => props.$bgcolor || 'blue'};
+  color: ${(props) => props.$textcolor || 'white'};
   width: ${(props) =>
     typeof props.width === 'number'
       ? `${props.width}px`
@@ -36,6 +41,15 @@ const StyledButton = styled.button<ButtonProps>`
   }
 `
 
-export const Button: React.FC<ButtonProps> = ({ text, ...props }) => {
-  return <StyledButton {...props}>{text}</StyledButton>
+export const Button: React.FC<ButtonProps> = ({
+  text,
+  bgcolor,
+  textcolor,
+  ...props
+}) => {
+  return (
+    <StyledButton $bgcolor={bgcolor} $textcolor={textcolor} {...props}>
+      {text}
+    </StyledButton>
+  )
 }

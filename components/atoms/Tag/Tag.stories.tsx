@@ -22,14 +22,14 @@ export const Default: Story = {
 export const RedTag: Story = {
   args: {
     text: 'White Tag',
-    bgColor: '#fff',
+    bgcolor: '#fff',
   },
 }
 
 export const ClickableTag: Story = {
   args: {
     text: 'Clickable Tag',
-    bgColor: '#FFA234',
+    bgcolor: '#FFA234',
     onClick: () => console.log('Tag clicked!'),
   },
 }

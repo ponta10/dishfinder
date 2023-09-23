@@ -8,8 +8,8 @@ const meta: Meta = {
     layout: 'centered',
   },
   argTypes: {
-    bgColor: { control: 'color' },
-    textColor: { control: 'color' },
+    bgcolor: { control: 'color' },
+    textcolor: { control: 'color' },
     text: { control: 'text' },
     width: { control: 'text' },
     fontSize: { control: 'text' },
@@ -34,8 +34,8 @@ export const Default: Story = {
 export const SearchButton: Story = {
   args: {
     text: '検索',
-    bgColor: '#FFA234',
-    textColor: '#fff',
+    bgcolor: '#FFA234',
+    textcolor: '#fff',
     fontSize: '32px',
   },
 }

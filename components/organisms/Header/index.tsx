@@ -50,12 +50,12 @@ const Container = styled.div`
   transform: translateX(-50%);
 `
 
-const FlexContainer = styled.div<{ gap?: number }>`
+const FlexContainer = styled.div<{ $gap?: number }>`
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 16px;
-  gap: ${(props) => (props.gap ? `${props.gap}px` : 0)};
+  gap: ${(props) => (props.$gap ? `${props.$gap}px` : 0)};
 `
 
 const FormContainer = styled.div`
@@ -138,7 +138,7 @@ export const Header: React.FC<HeaderProps> = ({ isLabelWhite = false }) => {
                 placeholder="場面"
               />
             </FlexContainer>
-            <FlexContainer gap={24}>
+            <FlexContainer $gap={24}>
               <Checkbox
                 name="isPrivate"
                 control={control}
@@ -167,7 +167,7 @@ export const Header: React.FC<HeaderProps> = ({ isLabelWhite = false }) => {
             <Button
               type="submit"
               text="検索"
-              bgColor="#FFA234"
+              bgcolor="#FFA234"
               width="20%"
               fontSize="20px"
             />

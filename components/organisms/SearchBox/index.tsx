@@ -1,11 +1,38 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Form } from '../Form'
-import { z } from 'zod'
+import { ZodErrorMap, z } from 'zod'
 import { TextField } from '@/components/atoms/TextField'
 import { Select } from '@/components/atoms/Select'
 import { Checkbox } from '@/components/atoms/Checkbox'
 import { Button } from '@/components/atoms/Button'
+
+interface SearchBoxProps {
+    setSearch: (value: boolean) => void;
+}
+
+const customErrorMap: ZodErrorMap = (issue, ctx) => {
+    if (issue.code === z.ZodIssueCode.invalid_type) {
+      if (issue.expected === 'string') {
+        switch (
+          issue.path[0] // issue.path[0] でフィールド名を取得
+        ) {
+          case 'genre':
+            return { message: 'ジャンルを入力してください。' }
+          case 'area':
+            return { message: 'エリアを入力してください。' }
+          default:
+            return { message: '文字列を入力してください。' }
+        }
+      }
+    }
+    if (issue.code === z.ZodIssueCode.custom) {
+      return { message: `less-than-${(issue.params || {}).minimum}` }
+    }
+    return { message: ctx.defaultError }
+  }
+  
+  z.setErrorMap(customErrorMap)
 
 const formSchema = z.object({
   area: z.string(),
@@ -21,11 +48,11 @@ const formSchema = z.object({
 
 const Container = styled.div``
 
-const FlexContainer = styled.div<{ gap?: number }>`
+const FlexContainer = styled.div<{ $gap?: number }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: ${(props) => (props.gap ? `${props.gap}px` : 0)};
+  gap: ${(props) => (props.$gap ? `${props.$gap}px` : 0)};
 `
 
 const FormContainer = styled.div`
@@ -61,7 +88,9 @@ const Headline = styled.h3`
   }
 `
 
-export const SearchBox = () => {
+export const SearchBox: React.FC<SearchBoxProps> = ({
+    setSearch
+}) => {
   const onSubmit = (data: any) => {
     console.log(data)
   }
@@ -88,6 +117,7 @@ export const SearchBox = () => {
                   width="100%"
                   error={!!formState.errors.area}
                   helperText={formState.errors.area?.message as string}
+                  onFocus={() => setSearch(true)}
                 />
                 <TextField
                   name="genre"
@@ -97,6 +127,7 @@ export const SearchBox = () => {
                   width="100%"
                   error={!!formState.errors.genre}
                   helperText={formState.errors.genre?.message as string}
+                  onFocus={() => setSearch(true)}
                 />
               </FlexContainer>
               <FlexContainer>
@@ -138,7 +169,7 @@ export const SearchBox = () => {
                 />
               </FlexContainer>
             </div>
-            <FlexContainer gap={24}>
+            <FlexContainer $gap={24}>
               <Checkbox
                 name="isPrivate"
                 control={control}
@@ -168,7 +199,7 @@ export const SearchBox = () => {
                 fontSize={checkboxFontSize}
               />
             </FlexContainer>
-            <Button type="submit" text="検索" bgColor="#FFA234" width="40%" />
+            <Button type="submit" text="検索" bgcolor="#FFA234" width="40%" onClick={() => setSearch(true)} />
           </FormContainer>
         )}
       </Form>

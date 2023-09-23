@@ -3,6 +3,10 @@ import styled from 'styled-components'
 import foodImage from '../../../../public/sp_food.jpg'
 import { SearchBox } from '@/components/organisms/SearchBox'
 
+interface TopProps {
+    setSearch: (value: boolean) => void
+}
+
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
@@ -44,7 +48,9 @@ const SearchContainer = styled.div`
   left: 0;
 `
 
-export const SpTop = () => {
+export const SpTop: React.FC<TopProps> = ({
+    setSearch
+}) => {
   return (
     <Container>
       <ImageContainer>
@@ -54,7 +60,7 @@ export const SpTop = () => {
         </TitleWrapper>
       </ImageContainer>
       <SearchContainer>
-        <SearchBox />
+        <SearchBox setSearch={setSearch} />
       </SearchContainer>
     </Container>
   )

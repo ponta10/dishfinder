@@ -17,13 +17,15 @@ export interface TextFieldProps {
   width?: string | number
   height?: string | number
   control: Control<any>
+  onFocus?: () => void
+  autoFocus?: boolean;
 }
 
 const StyledInput = styled.input<{
   width?: string | number
   height?: string | number
   size?: string
-  error?: boolean
+  $error?: boolean
 }>`
   width: ${(props) =>
     typeof props.width === 'number'
@@ -35,7 +37,7 @@ const StyledInput = styled.input<{
       : props.height || 'auto'};
   padding: ${(props) =>
     props.size === 'small' ? '8px' : props.size === 'large' ? '16px' : '12px'};
-  border: ${(props) => (props.error ? '2px solid red' : '2px solid #ccc')};
+  border: ${(props) => (props.$error ? '2px solid red' : '2px solid #ccc')};
   border-radius: 4px;
   box-sizing: border-box;
   height: 2;
@@ -46,8 +48,8 @@ const StyledLabel = styled.label`
   margin-bottom: 8px;
 `
 
-const StyledHelperText = styled.div<{ error?: boolean }>`
-  color: ${(props) => (props.error ? 'red' : '#666')};
+const StyledHelperText = styled.div<{ $error?: boolean }>`
+  color: ${(props) => (props.$error ? 'red' : '#666')};
   font-size: 12px;
   margin-top: 4px;
 `
@@ -59,6 +61,7 @@ export const TextField: React.FC<TextFieldProps> = ({
   rows = 3,
   helperText,
   control,
+  error,
   ...props
 }) => {
   return (
@@ -71,12 +74,12 @@ export const TextField: React.FC<TextFieldProps> = ({
           multiline ? (
             <textarea rows={rows} {...field} {...props} />
           ) : (
-            <StyledInput {...field} {...props} />
+            <StyledInput {...field} {...props} $error={error} onFocus={props.onFocus} autoFocus={props.autoFocus} />
           )
         }
       />
       {helperText && (
-        <StyledHelperText error={props.error}>{helperText}</StyledHelperText>
+        <StyledHelperText $error={error}>{helperText}</StyledHelperText>
       )}
     </div>
   )

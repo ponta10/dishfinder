@@ -8,11 +8,11 @@ export const mediaQuery = {
 
 export const useMediaQuery = (query: string) => {
   const formattedQuery = `(${query})`
-  const [match, setMatch] = useState(matchMedia(formattedQuery).matches)
-  console.log(match)
+  const [match, setMatch] = useState<boolean | null>(null) // 初期値をnullに設定
 
   useEffect(() => {
-    const mql = matchMedia(formattedQuery)
+    const mql = window.matchMedia(formattedQuery)
+    setMatch(mql.matches)
 
     if (mql.media === 'not all' || mql.media === 'invalid') {
       console.error(`useMediaQuery Error: Invalid media query`)

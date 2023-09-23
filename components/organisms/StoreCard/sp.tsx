@@ -53,7 +53,7 @@ export const StoreCard: React.FC<StoreCardProps> = ({
           <Price
             lunch={lunch}
             dinner={dinner}
-            flex
+            flex={true}
             iconSize={12}
             fontSize="10px"
           />

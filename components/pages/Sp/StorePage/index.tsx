@@ -5,6 +5,10 @@ import styled from 'styled-components'
 import GoogleMap from '../../../../public/google_maps.png'
 import { Header } from '@/components/organisms/Header/sp'
 
+interface StorePageProps {
+    setSearch: (value: boolean) => void
+}
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -27,10 +31,12 @@ const Tabelog = styled.p`
   font-weight: bold;
 `
 
-export const SpStorePage = () => {
+export const SpStorePage: React.FC<StorePageProps> = ({
+    setSearch
+}) => {
   return (
     <div>
-      <Header />
+      <Header setSearch={setSearch} />
       <Container>
         <IconWrapper>
           <Tabelog>食べログ</Tabelog>

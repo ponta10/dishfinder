@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { FaStar } from 'react-icons/fa'
 
 interface StarProps {
-  fillPercentage: number
+  $fillpercentage: number
 }
 
 const StarContainer = styled.div`
@@ -16,7 +16,7 @@ const FilledStar = styled.div<StarProps>`
   position: absolute;
   top: 0;
   left: 0;
-  width: ${(props) => props.fillPercentage * 100}%;
+  width: ${(props) => props.$fillpercentage * 100}%;
   height: 100%;
   color: #ffa234;
   overflow: hidden;
@@ -32,7 +32,7 @@ export const RatingStar: React.FC<RatingStarProps> = ({ value, size }) => {
   return (
     <StarContainer>
       <FaStar size={size} />
-      <FilledStar fillPercentage={value}>
+      <FilledStar $fillpercentage={value}>
         <FaStar size={size} />
       </FilledStar>
     </StarContainer>

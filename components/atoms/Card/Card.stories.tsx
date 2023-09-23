@@ -13,7 +13,7 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    bgColor: '#f5f5f5',
+    bgcolor: '#f5f5f5',
     width: '300px',
     children: (
       <>
@@ -26,7 +26,7 @@ export const Default: Story = {
 
 export const CustomContent: Story = {
   args: {
-    bgColor: '#e0e0e0',
+    bgcolor: '#e0e0e0',
     width: '400px',
     children: (
       <>
