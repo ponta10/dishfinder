@@ -10,6 +10,7 @@ export interface CheckboxProps {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   disabled?: boolean
   control: Control<any>
+  color?: string
 }
 
 const CheckboxContainer = styled.div`
@@ -28,8 +29,9 @@ const StyledCheckbox = styled.input.attrs({ type: 'checkbox' })<{
   accent-color: #ffa234;
 `
 
-const StyledLabel = styled.label`
+const StyledLabel = styled.label<{ color?: string }>`
   cursor: pointer;
+  color: ${(props) => props.color || '#000'};
 `
 
 export const Checkbox: React.FC<CheckboxProps> = ({
@@ -37,6 +39,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   label,
   control,
   name,
+  color,
   ...props
 }) => {
   const checkboxId = id || name
@@ -48,7 +51,9 @@ export const Checkbox: React.FC<CheckboxProps> = ({
       render={({ field }) => (
         <CheckboxContainer>
           <StyledCheckbox id={checkboxId} {...field} {...props} />
-          <StyledLabel htmlFor={checkboxId}>{label}</StyledLabel>
+          <StyledLabel htmlFor={checkboxId} color={color}>
+            {label}
+          </StyledLabel>
         </CheckboxContainer>
       )}
     />

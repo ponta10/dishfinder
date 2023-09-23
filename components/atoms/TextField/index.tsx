@@ -53,6 +53,7 @@ const StyledHelperText = styled.div<{ error?: boolean }>`
 `
 
 export const TextField: React.FC<TextFieldProps> = ({
+  name,
   label,
   multiline = false,
   rows = 3,

@@ -13,6 +13,7 @@ export interface SelectProps {
   error?: boolean
   helperText?: string
   control: Control<any>
+  placeholder?: string
   width?: string | number
 }
 
@@ -21,10 +22,11 @@ interface StyledSelectProps {
   error?: boolean
   disabled?: boolean
   width?: string | number
+  value?: string | number;
 }
 
 const StyledSelect = styled.select<StyledSelectProps>`
-width: ${(props) =>
+  width: ${(props) =>
     typeof props.width === 'number'
       ? `${props.width}px`
       : props.width || '100%'};
@@ -35,6 +37,7 @@ width: ${(props) =>
   box-sizing: border-box;
   font-size: 1rem;
   cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
+  color: ${(props) => (props.value === "" ? "rgba(0, 0, 0, 0.54)" : "initial")};
 `
 
 const StyledLabel = styled.label`
@@ -59,10 +62,11 @@ export const Select: React.FC<SelectProps> = ({
   error = false,
   helperText,
   width,
+  placeholder,
   control,
 }) => {
   return (
-<div>
+    <div>
       {label && <StyledLabel htmlFor={name}>{label}</StyledLabel>}
       <Controller
         name={name!}
@@ -71,15 +75,17 @@ export const Select: React.FC<SelectProps> = ({
         render={({ field }) => (
           <StyledSelect
             {...field}
+            value={field.value}
             onChange={(e) => {
-                field.onChange(e);
-                if (onChange) onChange(e);
+              field.onChange(e)
+              if (onChange) onChange(e)
             }}
             disabled={disabled}
             size={size}
             error={error}
             width={width}
           >
+            <option value="" disabled>{placeholder}</option>
             {items.map((item) => (
               <option key={item.value} value={item.value}>
                 {item.label}

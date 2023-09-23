@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react'
 import {
   useForm,
   SubmitHandler,
-  RegisterOptions,
+  UseFormProps,
   UseFormReturn,
   FieldValues,
 } from 'react-hook-form'
@@ -11,7 +11,7 @@ import { ZodSchema } from 'zod'
 
 interface FormProps<T extends FieldValues> {
   children: (methods: UseFormReturn<T>) => ReactNode
-  options?: RegisterOptions
+  options?: UseFormProps
   schema: ZodSchema<T>
   onSubmit: SubmitHandler<T>
 }
