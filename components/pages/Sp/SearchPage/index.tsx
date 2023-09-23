@@ -10,31 +10,31 @@ import { Button } from '@/components/atoms/Button'
 import { Select } from '@/components/atoms/Select'
 
 interface SearchPageProps {
-    setSearch: (value: boolean) => void;
+  setSearch: (value: boolean) => void
 }
 
 const customErrorMap: ZodErrorMap = (issue, ctx) => {
-    if (issue.code === z.ZodIssueCode.invalid_type) {
-      if (issue.expected === 'string') {
-        switch (
-          issue.path[0] // issue.path[0] でフィールド名を取得
-        ) {
-          case 'genre':
-            return { message: 'ジャンルを入力してください。' }
-          case 'area':
-            return { message: 'エリアを入力してください。' }
-          default:
-            return { message: '文字列を入力してください。' }
-        }
+  if (issue.code === z.ZodIssueCode.invalid_type) {
+    if (issue.expected === 'string') {
+      switch (
+        issue.path[0] // issue.path[0] でフィールド名を取得
+      ) {
+        case 'genre':
+          return { message: 'ジャンルを入力してください。' }
+        case 'area':
+          return { message: 'エリアを入力してください。' }
+        default:
+          return { message: '文字列を入力してください。' }
       }
     }
-    if (issue.code === z.ZodIssueCode.custom) {
-      return { message: `less-than-${(issue.params || {}).minimum}` }
-    }
-    return { message: ctx.defaultError }
   }
-  
-  z.setErrorMap(customErrorMap)
+  if (issue.code === z.ZodIssueCode.custom) {
+    return { message: `less-than-${(issue.params || {}).minimum}` }
+  }
+  return { message: ctx.defaultError }
+}
+
+z.setErrorMap(customErrorMap)
 
 const formSchema = z.object({
   area: z.string(),
@@ -102,9 +102,7 @@ const FormContainer = styled.div`
   align-items: center;
 `
 
-export const SearchPage: React.FC<SearchPageProps> = ({
-    setSearch
-}) => {
+export const SearchPage: React.FC<SearchPageProps> = ({ setSearch }) => {
   const checkboxSize: number = 14
   const checkboxFontSize: string = '10px'
   const onSubmit = (data: any) => {

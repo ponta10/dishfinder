@@ -8,31 +8,31 @@ import { Checkbox } from '@/components/atoms/Checkbox'
 import { Button } from '@/components/atoms/Button'
 
 interface SearchBoxProps {
-    setSearch: (value: boolean) => void;
+  setSearch: (value: boolean) => void
 }
 
 const customErrorMap: ZodErrorMap = (issue, ctx) => {
-    if (issue.code === z.ZodIssueCode.invalid_type) {
-      if (issue.expected === 'string') {
-        switch (
-          issue.path[0] // issue.path[0] でフィールド名を取得
-        ) {
-          case 'genre':
-            return { message: 'ジャンルを入力してください。' }
-          case 'area':
-            return { message: 'エリアを入力してください。' }
-          default:
-            return { message: '文字列を入力してください。' }
-        }
+  if (issue.code === z.ZodIssueCode.invalid_type) {
+    if (issue.expected === 'string') {
+      switch (
+        issue.path[0] // issue.path[0] でフィールド名を取得
+      ) {
+        case 'genre':
+          return { message: 'ジャンルを入力してください。' }
+        case 'area':
+          return { message: 'エリアを入力してください。' }
+        default:
+          return { message: '文字列を入力してください。' }
       }
     }
-    if (issue.code === z.ZodIssueCode.custom) {
-      return { message: `less-than-${(issue.params || {}).minimum}` }
-    }
-    return { message: ctx.defaultError }
   }
-  
-  z.setErrorMap(customErrorMap)
+  if (issue.code === z.ZodIssueCode.custom) {
+    return { message: `less-than-${(issue.params || {}).minimum}` }
+  }
+  return { message: ctx.defaultError }
+}
+
+z.setErrorMap(customErrorMap)
 
 const formSchema = z.object({
   area: z.string(),
@@ -88,9 +88,7 @@ const Headline = styled.h3`
   }
 `
 
-export const SearchBox: React.FC<SearchBoxProps> = ({
-    setSearch
-}) => {
+export const SearchBox: React.FC<SearchBoxProps> = ({ setSearch }) => {
   const onSubmit = (data: any) => {
     console.log(data)
   }
@@ -199,7 +197,13 @@ export const SearchBox: React.FC<SearchBoxProps> = ({
                 fontSize={checkboxFontSize}
               />
             </FlexContainer>
-            <Button type="submit" text="検索" bgcolor="#FFA234" width="40%" onClick={() => setSearch(true)} />
+            <Button
+              type="submit"
+              text="検索"
+              bgcolor="#FFA234"
+              width="40%"
+              onClick={() => setSearch(true)}
+            />
           </FormContainer>
         )}
       </Form>

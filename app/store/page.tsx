@@ -12,7 +12,7 @@ const store = () => {
   if (isSp) {
     if (search) {
       return <SearchPage setSearch={setSearch} />
-    } 
+    }
     return <SpStorePage setSearch={setSearch} />
   }
   return <StorePage />

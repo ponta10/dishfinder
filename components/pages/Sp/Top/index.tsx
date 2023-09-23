@@ -4,7 +4,7 @@ import foodImage from '../../../../public/sp_food.jpg'
 import { SearchBox } from '@/components/organisms/SearchBox'
 
 interface TopProps {
-    setSearch: (value: boolean) => void
+  setSearch: (value: boolean) => void
 }
 
 const Container = styled.div`
@@ -48,9 +48,7 @@ const SearchContainer = styled.div`
   left: 0;
 `
 
-export const SpTop: React.FC<TopProps> = ({
-    setSearch
-}) => {
+export const SpTop: React.FC<TopProps> = ({ setSearch }) => {
   return (
     <Container>
       <ImageContainer>

@@ -18,7 +18,7 @@ export interface TextFieldProps {
   height?: string | number
   control: Control<any>
   onFocus?: () => void
-  autoFocus?: boolean;
+  autoFocus?: boolean
 }
 
 const StyledInput = styled.input<{
@@ -74,7 +74,13 @@ export const TextField: React.FC<TextFieldProps> = ({
           multiline ? (
             <textarea rows={rows} {...field} {...props} />
           ) : (
-            <StyledInput {...field} {...props} $error={error} onFocus={props.onFocus} autoFocus={props.autoFocus} />
+            <StyledInput
+              {...field}
+              {...props}
+              $error={error}
+              onFocus={props.onFocus}
+              autoFocus={props.autoFocus}
+            />
           )
         }
       />

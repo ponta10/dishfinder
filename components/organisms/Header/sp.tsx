@@ -4,7 +4,7 @@ import { AiOutlineSearch } from 'react-icons/ai'
 import { Button } from '@/components/atoms/Button'
 
 interface HeaderProps {
-    setSearch: (value: boolean) => void;
+  setSearch: (value: boolean) => void
 }
 
 const Container = styled.div`
@@ -37,9 +37,7 @@ const SearchTextArea = styled.div`
   gap: 12px;
 `
 
-export const Header: React.FC<HeaderProps> = ({
-    setSearch
-}) => {
+export const Header: React.FC<HeaderProps> = ({ setSearch }) => {
   return (
     <Container>
       <Wrapper onClick={() => setSearch(true)}>

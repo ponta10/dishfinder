@@ -12,7 +12,7 @@ export default function Home() {
   if (isSp) {
     if (search) {
       return <SearchPage setSearch={setSearch} />
-    } 
+    }
     return <SpTop setSearch={setSearch} />
   }
 

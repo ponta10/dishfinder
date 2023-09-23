@@ -6,7 +6,7 @@ import GoogleMap from '../../../../public/google_maps.png'
 import { Header } from '@/components/organisms/Header/sp'
 
 interface StorePageProps {
-    setSearch: (value: boolean) => void
+  setSearch: (value: boolean) => void
 }
 
 const Container = styled.div`
@@ -31,9 +31,7 @@ const Tabelog = styled.p`
   font-weight: bold;
 `
 
-export const SpStorePage: React.FC<StorePageProps> = ({
-    setSearch
-}) => {
+export const SpStorePage: React.FC<StorePageProps> = ({ setSearch }) => {
   return (
     <div>
       <Header setSearch={setSearch} />
