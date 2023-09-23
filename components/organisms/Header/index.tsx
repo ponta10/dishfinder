@@ -34,7 +34,8 @@ z.setErrorMap(customErrorMap)
 const formSchema = z.object({
   area: z.string(),
   genre: z.string(),
-  budget: z.string().optional(),
+  min: z.string().optional(),
+  max: z.string().optional(),
   situation: z.string().optional(),
   isPrivate: z.boolean(),
   isAllDrinks: z.boolean(),
@@ -44,7 +45,7 @@ const formSchema = z.object({
 
 const Container = styled.div`
   position: fixed;
-  top: 80px;
+  top: 60px;
   left: 50%;
   transform: translateX(-50%);
 `
@@ -74,7 +75,11 @@ export const Header: React.FC<HeaderProps> = ({ isLabelWhite = false }) => {
   }
   return (
     <Container>
-      <Form onSubmit={onSubmit} schema={formSchema} options={{ defaultValues: {min: "", max: "", situation: ""} }}>
+      <Form
+        onSubmit={onSubmit}
+        schema={formSchema}
+        options={{ defaultValues: { min: '', max: '', situation: '' } }}
+      >
         {({ control, formState }) => (
           <FormContainer>
             <FlexContainer>
@@ -106,7 +111,7 @@ export const Header: React.FC<HeaderProps> = ({ isLabelWhite = false }) => {
                 width={150}
                 error={!!formState.errors.budget}
                 helperText={formState.errors.budget?.message as string}
-                placeholder='下限予算'
+                placeholder="下限予算"
               />
               <Select
                 name="max"
@@ -118,7 +123,7 @@ export const Header: React.FC<HeaderProps> = ({ isLabelWhite = false }) => {
                 width={150}
                 error={!!formState.errors.budget}
                 helperText={formState.errors.budget?.message as string}
-                placeholder='上限予算'
+                placeholder="上限予算"
               />
               <Select
                 name="situation"
@@ -130,7 +135,7 @@ export const Header: React.FC<HeaderProps> = ({ isLabelWhite = false }) => {
                 width={150}
                 error={!!formState.errors.situation}
                 helperText={formState.errors.situation?.message as string}
-                placeholder='場面'
+                placeholder="場面"
               />
             </FlexContainer>
             <FlexContainer gap={24}>

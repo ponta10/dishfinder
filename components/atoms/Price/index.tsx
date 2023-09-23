@@ -8,35 +8,44 @@ interface PriceProps {
   lunch: string
   dinner: string
   flex?: boolean
+  iconSize?: number
+  fontSize?: string
 }
 
-const Wrapper = styled.div<{ flex?: boolean }>`
+const Container = styled.div<{ flex?: boolean }>`
   display: ${(props) => (props.flex ? 'flex' : 'block')};
   alignitems: center;
-  gap: 24px;
+  gap: 12px;
 `
 
-const Container = styled.div`
+const Wrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
+  margin-bottom: 8px;
 `
 
-const Amount = styled.p`
-  font-size: 16px;
+const Amount = styled.p<{ fontSize?: string }>`
+  font-size: ${(props) => props.fontSize || '1rem'};
 `
 
-export const Price: React.FC<PriceProps> = ({ lunch, dinner, flex }) => {
+export const Price: React.FC<PriceProps> = ({
+  lunch,
+  dinner,
+  flex,
+  iconSize,
+  fontSize,
+}) => {
   return (
-    <Wrapper flex={flex}>
-      <Container>
-        <Image width={40} height={40} src={sun} alt="太陽"></Image>
-        <Amount>{lunch}</Amount>
-      </Container>
-      <Container>
-        <Image width={40} height={40} src={moon} alt="月"></Image>
-        <Amount>{dinner}</Amount>
-      </Container>
-    </Wrapper>
+    <Container flex={flex}>
+      <Wrapper>
+        <Image width={iconSize} height={iconSize} src={sun} alt="太陽"></Image>
+        <Amount fontSize={fontSize}>{lunch}</Amount>
+      </Wrapper>
+      <Wrapper>
+        <Image width={iconSize} height={iconSize} src={moon} alt="月"></Image>
+        <Amount fontSize={fontSize}>{dinner}</Amount>
+      </Wrapper>
+    </Container>
   )
 }

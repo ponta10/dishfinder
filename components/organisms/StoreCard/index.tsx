@@ -49,7 +49,7 @@ export const StoreCard: React.FC<StoreCardProps> = ({
         <StoreLink href={link} target="_blank" rel="noopener noreferrer">
           {name}
         </StoreLink>
-        <Price lunch={lunch} dinner={dinner} />
+        <Price lunch={lunch} dinner={dinner} iconSize={32} />
         <Rating value={google} size={40} />
       </Container>
     </Card>

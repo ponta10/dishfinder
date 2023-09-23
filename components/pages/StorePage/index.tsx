@@ -10,7 +10,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 40px;
-  margin-top: 250px;
+  margin-top: 240px;
 `
 
 const IconWrapper = styled.div`

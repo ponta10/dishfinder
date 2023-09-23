@@ -22,7 +22,7 @@ interface StyledSelectProps {
   error?: boolean
   disabled?: boolean
   width?: string | number
-  value?: string | number;
+  value?: string | number
 }
 
 const StyledSelect = styled.select<StyledSelectProps>`
@@ -37,7 +37,7 @@ const StyledSelect = styled.select<StyledSelectProps>`
   box-sizing: border-box;
   font-size: 1rem;
   cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
-  color: ${(props) => (props.value === "" ? "rgba(0, 0, 0, 0.54)" : "initial")};
+  color: ${(props) => (props.value === '' ? 'rgba(0, 0, 0, 0.54)' : 'initial')};
 `
 
 const StyledLabel = styled.label`
@@ -66,7 +66,7 @@ export const Select: React.FC<SelectProps> = ({
   control,
 }) => {
   return (
-    <div>
+    <>
       {label && <StyledLabel htmlFor={name}>{label}</StyledLabel>}
       <Controller
         name={name!}
@@ -85,7 +85,9 @@ export const Select: React.FC<SelectProps> = ({
             error={error}
             width={width}
           >
-            <option value="" disabled>{placeholder}</option>
+            <option value="" disabled>
+              {placeholder}
+            </option>
             {items.map((item) => (
               <option key={item.value} value={item.value}>
                 {item.label}
@@ -97,6 +99,6 @@ export const Select: React.FC<SelectProps> = ({
       {helperText && (
         <StyledHelperText error={error}>{helperText}</StyledHelperText>
       )}
-    </div>
+    </>
   )
 }
