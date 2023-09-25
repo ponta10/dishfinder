@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { Form } from '../Form'
 import { ZodErrorMap, z } from 'zod'
@@ -7,6 +7,8 @@ import { Select } from '@/components/atoms/Select'
 import { Checkbox } from '@/components/atoms/Checkbox'
 import { Button } from '@/components/atoms/Button'
 import { useRouter } from 'next/navigation'
+import { Recommend } from '../Recommend'
+import { areaList, genreList } from '@/utils/const'
 
 const customErrorMap: ZodErrorMap = (issue, ctx) => {
   if (issue.code === z.ZodIssueCode.invalid_type) {
@@ -56,6 +58,7 @@ const FlexContainer = styled.div<{ $gap?: number }>`
   justify-content: center;
   margin-bottom: 16px;
   gap: ${(props) => (props.$gap ? `${props.$gap}px` : 0)};
+  position: relative;
 `
 
 const FormContainer = styled.div`
@@ -69,8 +72,35 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ isLabelWhite = false }) => {
   const router = useRouter()
   const labelColor = isLabelWhite ? '#fff' : '#000'
+  const [name, setName] = useState<string>('')
+  const [area, seArea] = useState<string>('')
+  const [genre, setGenre] = useState<string>('')
+  const items = name === 'area' ? areaList : name === 'genre' ? genreList : []
+  const containerRef = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node) &&
+        items
+      ) {
+        setName('')
+      }
+    }
+
+    if (items) {
+      // nameが存在するときのみイベントリスナーを追加
+      document.addEventListener('click', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside)
+    }
+  }, [])
+
   const onSubmit = (data: any) => {
-    console.log(data)
+    console.log(data, area, genre)
     router.push('/store')
   }
   return (
@@ -78,28 +108,38 @@ export const Header: React.FC<HeaderProps> = ({ isLabelWhite = false }) => {
       <Form
         onSubmit={onSubmit}
         schema={formSchema}
-        options={{ defaultValues: { min: '', max: '', situation: '' } }}
+        options={{
+          defaultValues: {
+            area: '',
+            genre: '',
+            min: '',
+            max: '',
+            situation: '',
+          },
+        }}
       >
-        {({ control, formState }) => (
+        {({ control, formState, setValue }) => (
           <FormContainer>
-            <FlexContainer>
+            <FlexContainer ref={containerRef}>
               <TextField
                 name="area"
                 control={control}
                 placeholder="エリア(例: 渋谷・新宿)"
-                height={50}
+                height={48}
                 width={200}
                 error={!!formState.errors.area}
                 helperText={formState.errors.area?.message as string}
+                onFocus={() => setName('area')}
               />
               <TextField
                 name="genre"
                 control={control}
                 placeholder="ジャンル(例: イタリアン・中華)"
-                height={50}
+                height={48}
                 width={200}
                 error={!!formState.errors.genre}
                 helperText={formState.errors.genre?.message as string}
+                onFocus={() => setName('genre')}
               />
               <Select
                 name="min"
@@ -112,6 +152,7 @@ export const Header: React.FC<HeaderProps> = ({ isLabelWhite = false }) => {
                 error={!!formState.errors.budget}
                 helperText={formState.errors.budget?.message as string}
                 placeholder="下限予算"
+                onFocus={() => setName('')}
               />
               <Select
                 name="max"
@@ -124,6 +165,7 @@ export const Header: React.FC<HeaderProps> = ({ isLabelWhite = false }) => {
                 error={!!formState.errors.budget}
                 helperText={formState.errors.budget?.message as string}
                 placeholder="上限予算"
+                onFocus={() => setName('')}
               />
               <Select
                 name="situation"
@@ -136,7 +178,19 @@ export const Header: React.FC<HeaderProps> = ({ isLabelWhite = false }) => {
                 error={!!formState.errors.situation}
                 helperText={formState.errors.situation?.message as string}
                 placeholder="場面"
+                onFocus={() => setName('')}
               />
+              {name && (
+                <Recommend
+                  setValue={setValue}
+                  name={name}
+                  setArea={seArea}
+                  setGenre={setGenre}
+                  setName={setName}
+                  items={items}
+                  area={area}
+                />
+              )}
             </FlexContainer>
             <FlexContainer $gap={24}>
               <Checkbox

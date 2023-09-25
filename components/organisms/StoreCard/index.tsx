@@ -45,12 +45,12 @@ export const StoreCard: React.FC<StoreCardProps> = ({
   return (
     <Card width={width}>
       <Container>
-        <Rating value={tabelog} size={40} />
+        <Rating value={tabelog} size={32} />
         <StoreLink href={link} target="_blank" rel="noopener noreferrer">
           {name}
         </StoreLink>
         <Price lunch={lunch} dinner={dinner} iconSize={32} />
-        <Rating value={google} size={40} />
+        <Rating value={google} size={32} />
       </Container>
     </Card>
   )

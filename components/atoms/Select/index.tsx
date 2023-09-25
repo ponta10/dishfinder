@@ -15,6 +15,7 @@ export interface SelectProps {
   control: Control<any>
   placeholder?: string
   width?: string | number
+  onFocus?: (event: React.ChangeEvent<HTMLSelectElement>) => void
 }
 
 interface StyledSelectProps {
@@ -32,8 +33,8 @@ const StyledSelect = styled.select<StyledSelectProps>`
       : props.width || '100%'};
   padding: ${(props) =>
     props.size === 'small' ? '8px' : props.size === 'large' ? '16px' : '12px'};
-  border: ${(props) => (props.$error ? '2px solid red' : '2px solid #ccc')};
-  border-radius: 4px;
+  border: ${(props) => (props.$error ? '1px solid red' : '1px solid #ccc')};
+  //   border-radius: 4px;
   box-sizing: border-box;
   font-size: 1rem;
   cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
@@ -64,6 +65,7 @@ export const Select: React.FC<SelectProps> = ({
   width,
   placeholder,
   control,
+  onFocus,
 }) => {
   return (
     <>
@@ -80,6 +82,7 @@ export const Select: React.FC<SelectProps> = ({
               field.onChange(e)
               if (onChange) onChange(e)
             }}
+            onFocus={onFocus}
             disabled={disabled}
             size={size}
             $error={error}

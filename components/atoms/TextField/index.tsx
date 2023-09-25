@@ -19,6 +19,7 @@ export interface TextFieldProps {
   control: Control<any>
   onFocus?: () => void
   autoFocus?: boolean
+  onBlur?: (e: any) => void
 }
 
 const StyledInput = styled.input<{
@@ -37,8 +38,8 @@ const StyledInput = styled.input<{
       : props.height || 'auto'};
   padding: ${(props) =>
     props.size === 'small' ? '8px' : props.size === 'large' ? '16px' : '12px'};
-  border: ${(props) => (props.$error ? '2px solid red' : '2px solid #ccc')};
-  border-radius: 4px;
+  border: ${(props) => (props.$error ? '1px solid red' : '1px solid #ccc')};
+  //   border-radius: 4px;
   box-sizing: border-box;
   height: 2;
 `
@@ -78,7 +79,6 @@ export const TextField: React.FC<TextFieldProps> = ({
               {...field}
               {...props}
               $error={error}
-              onFocus={props.onFocus}
               autoFocus={props.autoFocus}
             />
           )

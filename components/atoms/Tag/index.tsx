@@ -19,6 +19,7 @@ const TagBox = styled.div<{ $bgcolor?: string; width?: string | number }>`
       ? `${props.width}px`
       : props.width || 'auto'};
   display: inline-block;
+  cursor: pointer;
 `
 
 export const Tag: React.FC<TagProps> = ({ text, bgcolor, onClick, width }) => {
