@@ -10,7 +10,8 @@ interface RecommendProps {
   setGenre: (name: string) => void
   setName: (name: string) => void
   items?: Area[]
-  area?: string
+  val: string
+  setVal: (val: string) => void
 }
 
 const Container = styled.div`
@@ -35,6 +36,8 @@ export const Recommend: React.FC<RecommendProps> = ({
   setGenre,
   items,
   setName,
+  val,
+  setVal,
 }) => {
   const handleClick = (value: string, code: string) => {
     setValue(name, value)
@@ -44,13 +47,16 @@ export const Recommend: React.FC<RecommendProps> = ({
       setGenre(code)
     }
     setName('')
+    setVal('')
   }
+
+  const filterItems = items?.filter((item) => item.value.includes(val))
 
   return (
     <Container>
       <p>候補</p>
-      {items &&
-        items.map((item, index) => (
+      {filterItems &&
+        filterItems.map((item, index) => (
           <Tag
             onClick={() => handleClick(item?.value, item?.code)}
             text={item?.value}

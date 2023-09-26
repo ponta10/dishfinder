@@ -19,7 +19,8 @@ export interface TextFieldProps {
   control: Control<any>
   onFocus?: () => void
   autoFocus?: boolean
-  onBlur?: (e: any) => void
+  onBlur?: () => void
+  onChange?: (e: any) => void
 }
 
 const StyledInput = styled.input<{
@@ -42,6 +43,12 @@ const StyledInput = styled.input<{
   //   border-radius: 4px;
   box-sizing: border-box;
   height: 2;
+  &:focus {
+    border-bottom: 2px solid #ffa234;
+    border-color: #ffa234;
+    outline: none;
+    box-shadow: 0 2px 5px #ffa234;
+  }
 `
 
 const StyledLabel = styled.label`
@@ -63,6 +70,7 @@ export const TextField: React.FC<TextFieldProps> = ({
   helperText,
   control,
   error,
+  onChange,
   ...props
 }) => {
   return (
@@ -78,6 +86,10 @@ export const TextField: React.FC<TextFieldProps> = ({
             <StyledInput
               {...field}
               {...props}
+              onChange={(e) => {
+                field.onChange(e)
+                if (onChange) onChange(e)
+              }}
               $error={error}
               autoFocus={props.autoFocus}
             />

@@ -39,7 +39,7 @@ export const Rating: React.FC<RatingProps> = ({ value, size, fontSize }) => {
           <RatingStar key={`empty-${index}`} value={0} size={size} />
         ))}
       </StarsContainer>
-      <ValueText fontSize={fontSize}>{value.toFixed(1)}</ValueText>
+      <ValueText fontSize={fontSize}>{value?.toFixed(1)}</ValueText>
     </RatingContainer>
   )
 }

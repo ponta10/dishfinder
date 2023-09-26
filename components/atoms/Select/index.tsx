@@ -39,6 +39,13 @@ const StyledSelect = styled.select<StyledSelectProps>`
   font-size: 1rem;
   cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
   color: ${(props) => (props.value === '' ? 'rgba(0, 0, 0, 0.54)' : 'initial')};
+
+  &:focus {
+    border-bottom: 2px solid #ffa234;
+    border-color: #ffa234;
+    outline: none;
+    box-shadow: 0 2px 5px #ffa234;
+  }
 `
 
 const StyledLabel = styled.label`
@@ -91,8 +98,8 @@ export const Select: React.FC<SelectProps> = ({
             <option value="" disabled>
               {placeholder}
             </option>
-            {items.map((item) => (
-              <option key={item.value} value={item.value}>
+            {items.map((item, index) => (
+              <option key={index} value={item.value}>
                 {item.label}
               </option>
             ))}

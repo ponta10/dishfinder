@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Form } from '../Form'
-import { ZodErrorMap, z } from 'zod'
+import { z } from 'zod'
 import { TextField } from '@/components/atoms/TextField'
 import { Select } from '@/components/atoms/Select'
 import { Checkbox } from '@/components/atoms/Checkbox'
