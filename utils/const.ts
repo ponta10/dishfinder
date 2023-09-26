@@ -9,7 +9,7 @@ interface Genre {
 }
 
 interface Price {
-  value: string
+  value: string | number
   label: string
 }
 
@@ -219,18 +219,18 @@ export const genreList: Genre[] = [
 ]
 
 export const price: Price[] = [
-  { value: '1', label: '¥1,000' },
-  { value: '2', label: '¥2,000' },
-  { value: '3', label: '¥3,000' },
-  { value: '4', label: '¥4,000' },
-  { value: '5', label: '¥5,000' },
-  { value: '6', label: '¥6,000' },
-  { value: '7', label: '¥8,000' },
-  { value: '8', label: '¥10,000' },
-  { value: '9', label: '¥15,000' },
-  { value: '10', label: '¥20,000' },
-  { value: '11', label: '¥30,000' },
-  { value: '12', label: '¥50,000' },
+  { value: 1, label: '¥1,000' },
+  { value: 2, label: '¥2,000' },
+  { value: 3, label: '¥3,000' },
+  { value: 4, label: '¥4,000' },
+  { value: 5, label: '¥5,000' },
+  { value: 6, label: '¥6,000' },
+  { value: 7, label: '¥8,000' },
+  { value: 8, label: '¥10,000' },
+  { value: 9, label: '¥15,000' },
+  { value: 1, label: '¥20,000' },
+  { value: 10, label: '¥30,000' },
+  { value: 12, label: '¥50,000' },
 ]
 
 export const situation: Situation[] = [{ value: '12', label: '¥50,000' }]
