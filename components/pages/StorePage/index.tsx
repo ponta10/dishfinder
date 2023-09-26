@@ -4,6 +4,12 @@ import Image from 'next/image'
 import React from 'react'
 import styled from 'styled-components'
 import GoogleMap from '../../../public/google_maps.png'
+import { ResponseType, Store } from '@/utils/type'
+
+interface StorePageProps {
+  items: ResponseType
+  searchParams?: URLSearchParams
+}
 
 const Container = styled.div`
   display: flex;
@@ -27,23 +33,27 @@ const Tabelog = styled.p`
   font-weight: bold;
 `
 
-export const StorePage = () => {
+export const StorePage: React.FC<StorePageProps> = ({
+  items,
+  searchParams,
+}) => {
+  const genre = searchParams?.get('genre')
   return (
     <div>
-      <Header />
+      <Header searchParams={searchParams} />
       <Container>
         <IconWrapper>
           <Tabelog>食べログ</Tabelog>
           <Image width={60} height={60} src={GoogleMap} alt="GoogleMap" />
         </IconWrapper>
-        {[...Array(8)].map((_, i) => (
+        {items?.[`${genre}`]?.map((value: Store, i: number) => (
           <StoreCard
-            tabelog={3.49}
-            google={4.2}
-            lunch="¥1,000~1,999"
-            dinner="¥3,000~3,999"
-            name="ホームズパスタ 渋谷店"
-            link="https://tabelog.com/tokyo/A1303/A130301/13010478/"
+            tabelog={Number(value.score)}
+            google={Number(value.google_rating)}
+            lunch={value.lunch}
+            dinner={value.dinner}
+            name={value.store_name}
+            link={value.link}
             key={i}
             width="75%"
           />

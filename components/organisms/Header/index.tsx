@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { Form } from '../Form'
-import { ZodErrorMap, z } from 'zod'
+import { z } from 'zod'
 import { TextField } from '@/components/atoms/TextField'
 import { Select } from '@/components/atoms/Select'
 import { Checkbox } from '@/components/atoms/Checkbox'
 import { Button } from '@/components/atoms/Button'
 import { useRouter } from 'next/navigation'
 import { Recommend } from '../Recommend'
-import { areaList, genreList } from '@/utils/const'
+import { areaList, genreList, price, situation } from '@/utils/const'
 import { customErrorMap } from '@/utils/zodHelper'
 
 z.setErrorMap(customErrorMap)
@@ -30,6 +30,7 @@ const Container = styled.div`
   top: 60px;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 10;
 `
 
 const FlexContainer = styled.div<{ $gap?: number }>`
@@ -47,14 +48,19 @@ const FormContainer = styled.div`
 
 interface HeaderProps {
   isLabelWhite?: boolean
+  searchParams?: URLSearchParams
 }
 
-export const Header: React.FC<HeaderProps> = ({ isLabelWhite = false }) => {
+export const Header: React.FC<HeaderProps> = ({
+  isLabelWhite = false,
+  searchParams,
+}) => {
   const router = useRouter()
   const labelColor = isLabelWhite ? '#fff' : '#000'
   const [name, setName] = useState<string>('')
   const [area, seArea] = useState<string>('')
   const [genre, setGenre] = useState<string>('')
+  const [val, setVal] = useState<string>('')
   const items = name === 'area' ? areaList : name === 'genre' ? genreList : []
   const containerRef = useRef<HTMLDivElement | null>(null)
 
@@ -80,8 +86,11 @@ export const Header: React.FC<HeaderProps> = ({ isLabelWhite = false }) => {
   }, [])
 
   const onSubmit = (data: any) => {
-    console.log(data, area, genre)
-    router.push('/store')
+    data.area = area
+    data.genre = genre
+    const queryParams = new URLSearchParams(data).toString()
+
+    router.push(`/store?${queryParams}`)
   }
   return (
     <Container>
@@ -90,11 +99,11 @@ export const Header: React.FC<HeaderProps> = ({ isLabelWhite = false }) => {
         schema={formSchema}
         options={{
           defaultValues: {
-            area: '',
-            genre: '',
-            min: '',
-            max: '',
-            situation: '',
+            area: areaList?.find(item => item?.code === searchParams?.get('area'))?.value || '',
+            genre: genreList?.find(item => item?.code === searchParams?.get('genre'))?.value || '',
+            min: searchParams?.get('min') || '',
+            max: searchParams?.get('max') || '',
+            situation: searchParams?.get('situation') || '',
           },
         }}
       >
@@ -110,6 +119,7 @@ export const Header: React.FC<HeaderProps> = ({ isLabelWhite = false }) => {
                 error={!!formState.errors.area}
                 helperText={formState.errors.area?.message as string}
                 onFocus={() => setName('area')}
+                onChange={(e) => setVal(e.target.value)}
               />
               <TextField
                 name="genre"
@@ -120,14 +130,12 @@ export const Header: React.FC<HeaderProps> = ({ isLabelWhite = false }) => {
                 error={!!formState.errors.genre}
                 helperText={formState.errors.genre?.message as string}
                 onFocus={() => setName('genre')}
+                onChange={(e) => setVal(e.target.value)}
               />
               <Select
                 name="min"
                 control={control}
-                items={[
-                  { value: '¥1,000', label: '¥1,000' },
-                  { value: '¥2,000', label: '¥2,000' },
-                ]}
+                items={price}
                 width={150}
                 error={!!formState.errors.budget}
                 helperText={formState.errors.budget?.message as string}
@@ -137,10 +145,7 @@ export const Header: React.FC<HeaderProps> = ({ isLabelWhite = false }) => {
               <Select
                 name="max"
                 control={control}
-                items={[
-                  { value: '¥1,000', label: '¥1,000' },
-                  { value: '¥2,000', label: '¥2,000' },
-                ]}
+                items={price}
                 width={150}
                 error={!!formState.errors.budget}
                 helperText={formState.errors.budget?.message as string}
@@ -150,10 +155,7 @@ export const Header: React.FC<HeaderProps> = ({ isLabelWhite = false }) => {
               <Select
                 name="situation"
                 control={control}
-                items={[
-                  { value: '1人で', label: '1人で' },
-                  { value: 'デート', label: 'デート' },
-                ]}
+                items={situation}
                 width={150}
                 error={!!formState.errors.situation}
                 helperText={formState.errors.situation?.message as string}
@@ -168,7 +170,8 @@ export const Header: React.FC<HeaderProps> = ({ isLabelWhite = false }) => {
                   setGenre={setGenre}
                   setName={setName}
                   items={items}
-                  area={area}
+                  val={val}
+                  setVal={setVal}
                 />
               )}
             </FlexContainer>
