@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import React from 'react'
 import styled from 'styled-components'
 import { AiOutlineSearch } from 'react-icons/ai'
@@ -48,7 +48,15 @@ export const Header: React.FC<HeaderProps> = ({ setSearch, searchParams }) => {
   const router = useRouter()
   return (
     <Container>
-      <Image width={60} height={60} src={logo} alt='ロゴ' onClick={() => router.push('/')} style={{ cursor: 'pointer' }} priority  />
+      <Image
+        width={60}
+        height={60}
+        src={logo}
+        alt="ロゴ"
+        onClick={() => router.push('/')}
+        style={{ cursor: 'pointer' }}
+        priority
+      />
       <Wrapper onClick={() => setSearch(true)}>
         <SearchTextArea>
           <AiOutlineSearch size={24} />

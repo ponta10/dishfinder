@@ -8,6 +8,7 @@ import GoogleMap from '../../../public/google_maps.png'
 import { ResponseType, Store } from '@/utils/type'
 import logo from '../../../public/blackLogo.png'
 import { useRouter } from 'next/navigation'
+import { genreList } from '@/utils/const'
 
 interface StorePageProps {
   items: ResponseType
@@ -26,7 +27,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 40px;
-  margin-top: 240px;
+  margin-top: 220px;
   margin-bottom: 80px;
 `
 
@@ -44,12 +45,19 @@ const Tabelog = styled.p`
   font-weight: bold;
 `
 
+const GenreContainer = styled.div`
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+`
+
 export const StorePage: React.FC<StorePageProps> = ({
   items,
   searchParams,
 }) => {
   const router = useRouter()
-  const genre = searchParams?.get('genre')
   return (
     <div>
       <LogoContainer>
@@ -69,17 +77,24 @@ export const StorePage: React.FC<StorePageProps> = ({
           <Tabelog>食べログ</Tabelog>
           <Image width={40} height={40} src={GoogleMap} alt="GoogleMap" />
         </IconWrapper>
-        {items?.[`${genre}`]?.map((value: Store, i: number) => (
-          <StoreCard
-            tabelog={Number(value.score)}
-            google={Number(value.google_rating)}
-            lunch={value.lunch}
-            dinner={value.dinner}
-            name={value.store_name}
-            link={value.link}
-            key={i}
-            width="75%"
-          />
+        {Object.keys(items).map((genre) => (
+          <GenreContainer key={genre}>
+            {Object.keys(items).length > 1 && (
+              <h2>{genreList?.find((item) => item.code === genre)?.value}</h2>
+            )}
+            {items[genre].map((value: Store, i: number) => (
+              <StoreCard
+                tabelog={Number(value.score)}
+                google={Number(value.google_rating)}
+                lunch={value.lunch}
+                dinner={value.dinner}
+                name={value.store_name}
+                link={value.link}
+                key={i}
+                width="100%"
+              />
+            ))}
+          </GenreContainer>
         ))}
       </Container>
     </div>

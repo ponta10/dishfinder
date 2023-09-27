@@ -129,6 +129,7 @@ export const areaList: Area[] = [
 ]
 
 export const genreList: Genre[] = [
+  { code: 'random', value: 'なんでも' },
   { code: 'italian', value: 'イタリアン' },
   { code: 'pizza', value: 'ピザ' },
   { code: 'pasta', value: 'パスタ' },

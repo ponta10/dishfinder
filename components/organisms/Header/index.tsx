@@ -103,6 +103,9 @@ export const Header: React.FC<HeaderProps> = ({
             min: searchParams?.get('min') || '',
             max: searchParams?.get('max') || '',
             situation: searchParams?.get('situation') || '',
+            isAllDrinks: searchParams?.get('isAllDrinks') || false,
+            isAllEats: searchParams?.get('isAllEats') || false,
+            isLunch: searchParams?.get('isLunch') || false,
           },
         }}
       >
