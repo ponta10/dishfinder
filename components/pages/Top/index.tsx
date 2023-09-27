@@ -2,6 +2,8 @@ import { Header } from '@/components/organisms/Header'
 import React from 'react'
 import styled from 'styled-components'
 import foodImage from '../../../public/food.jpg'
+import Image from 'next/image'
+import logo from '../../../public/logo.png'
 
 const Container = styled.div`
   width: 100vw;
@@ -16,20 +18,9 @@ const TitleWrapper = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -40%);
   text-align: center;
   z-index: 2;
-`
-
-const Title = styled.p`
-  font-size: 64px;
-  font-weight: bold;
-  color: #fff;
-`
-
-const SubTitle = styled.p`
-  font-size: 28px;
-  color: #fff;
 `
 
 export const Top = () => {
@@ -37,8 +28,7 @@ export const Top = () => {
     <Container>
       <Header isLabelWhite />
       <TitleWrapper>
-        <Title>TabeloGooglemap</Title>
-        <SubTitle>〜お店選びをもっと簡単に〜</SubTitle>
+        <Image src={logo} width={400} height={400} alt="ロゴ" priority />
       </TitleWrapper>
     </Container>
   )

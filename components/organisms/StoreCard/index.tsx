@@ -19,6 +19,11 @@ const Container = styled.div`
   align-items: center;
   justify-content: space-around;
   gap: 12px;
+
+  > * {
+    flex: 1;
+    text-align: center;
+  }
 `
 
 const StoreLink = styled.a`
@@ -45,12 +50,12 @@ export const StoreCard: React.FC<StoreCardProps> = ({
   return (
     <Card width={width}>
       <Container>
-        <Rating value={tabelog} size={32} />
+        <Rating value={tabelog} size={32} fontSize="20px" />
         <StoreLink href={link} target="_blank" rel="noopener noreferrer">
           {name}
         </StoreLink>
         <Price lunch={lunch} dinner={dinner} iconSize={32} />
-        <Rating value={google} size={32} />
+        <Rating value={google} size={32} fontSize="20px" />
       </Container>
     </Card>
   )

@@ -12,9 +12,10 @@ interface RecommendProps {
   items?: Area[]
   val: string
   setVal: (val: string) => void
+  sp?: boolean
 }
 
-const Container = styled.div`
+const Container = styled.div<{ $sp?: boolean }>`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -22,8 +23,8 @@ const Container = styled.div`
   background-color: #fff;
   padding: 16px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  position: absolute;
-  top: 50px;
+  position: ${(props) => (props.$sp ? 'relative' : 'absolute')};
+  top: ${(props) => (props.$sp ? '0px' : '50px')};
   left: 0;
   width: 100%;
   z-index: 10;
@@ -38,6 +39,7 @@ export const Recommend: React.FC<RecommendProps> = ({
   setName,
   val,
   setVal,
+  sp,
 }) => {
   const handleClick = (value: string, code: string) => {
     setValue(name, value)
@@ -53,15 +55,14 @@ export const Recommend: React.FC<RecommendProps> = ({
   const filterItems = items?.filter((item) => item.value.includes(val))
 
   return (
-    <Container>
-      <p>候補</p>
+    <Container $sp={sp}>
       {filterItems &&
         filterItems.map((item, index) => (
           <Tag
             onClick={() => handleClick(item?.value, item?.code)}
             text={item?.value}
             key={index}
-            bgcolor="##faf8f5"
+            bgcolor="rgb(250, 248, 245)"
           />
         ))}
     </Container>

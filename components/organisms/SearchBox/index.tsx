@@ -6,25 +6,14 @@ import { TextField } from '@/components/atoms/TextField'
 import { Select } from '@/components/atoms/Select'
 import { Checkbox } from '@/components/atoms/Checkbox'
 import { Button } from '@/components/atoms/Button'
-import { customErrorMap } from '@/utils/zodHelper'
+import { customErrorMap, formSchema } from '@/utils/zodHelper'
+import { price, situation } from '@/utils/const'
 
 interface SearchBoxProps {
   setSearch: (value: boolean) => void
 }
 
 z.setErrorMap(customErrorMap)
-
-const formSchema = z.object({
-  area: z.string(),
-  genre: z.string(),
-  min: z.string().optional(),
-  max: z.string().optional(),
-  situation: z.string().optional(),
-  isPrivate: z.boolean(),
-  isAllDrinks: z.boolean(),
-  isAllEats: z.boolean(),
-  isLunch: z.boolean(),
-})
 
 const Container = styled.div``
 
@@ -112,10 +101,7 @@ export const SearchBox: React.FC<SearchBoxProps> = ({ setSearch }) => {
                 <Select
                   name="min"
                   control={control}
-                  items={[
-                    { value: '¥1,000', label: '¥1,000' },
-                    { value: '¥2,000', label: '¥2,000' },
-                  ]}
+                  items={price}
                   width="100%"
                   error={!!formState.errors.budget}
                   helperText={formState.errors.budget?.message as string}
@@ -124,10 +110,7 @@ export const SearchBox: React.FC<SearchBoxProps> = ({ setSearch }) => {
                 <Select
                   name="max"
                   control={control}
-                  items={[
-                    { value: '¥1,000', label: '¥1,000' },
-                    { value: '¥2,000', label: '¥2,000' },
-                  ]}
+                  items={price}
                   width="100%"
                   error={!!formState.errors.budget}
                   helperText={formState.errors.budget?.message as string}
@@ -136,10 +119,7 @@ export const SearchBox: React.FC<SearchBoxProps> = ({ setSearch }) => {
                 <Select
                   name="situation"
                   control={control}
-                  items={[
-                    { value: '1人で', label: '1人で' },
-                    { value: 'デート', label: 'デート' },
-                  ]}
+                  items={situation}
                   width="100%"
                   error={!!formState.errors.situation}
                   helperText={formState.errors.situation?.message as string}
@@ -148,13 +128,13 @@ export const SearchBox: React.FC<SearchBoxProps> = ({ setSearch }) => {
               </FlexContainer>
             </div>
             <FlexContainer $gap={24}>
-              <Checkbox
+              {/* <Checkbox
                 name="isPrivate"
                 control={control}
                 label="個室あり"
                 size={checkboxSize}
                 fontSize={checkboxFontSize}
-              />
+              /> */}
               <Checkbox
                 name="isAllDrinks"
                 control={control}

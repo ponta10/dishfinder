@@ -14,6 +14,7 @@ const RatingContainer = styled.div`
 
 const StarsContainer = styled.div`
   display: flex;
+  justify-content: center;
 `
 
 const ValueText = styled.span<{ fontSize?: string }>`
@@ -21,6 +22,8 @@ const ValueText = styled.span<{ fontSize?: string }>`
   text-align: center;
   margin-top: 4px;
   font-size: ${(props) => props.fontSize || '16px'};
+  color: #ffa234;
+  font-weight: bold;
 `
 
 export const Rating: React.FC<RatingProps> = ({ value, size, fontSize }) => {
@@ -39,7 +42,7 @@ export const Rating: React.FC<RatingProps> = ({ value, size, fontSize }) => {
           <RatingStar key={`empty-${index}`} value={0} size={size} />
         ))}
       </StarsContainer>
-      <ValueText fontSize={fontSize}>{value?.toFixed(1)}</ValueText>
+      <ValueText fontSize={fontSize}>{value}</ValueText>
     </RatingContainer>
   )
 }
