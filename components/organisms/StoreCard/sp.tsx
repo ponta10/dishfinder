@@ -17,14 +17,14 @@ interface StoreCardProps {
 const Container = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   gap: 12px;
 `
 
 const StoreLink = styled.a`
   text-decoration: none;
   color: #66a3e0;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
 
   &:hover {
@@ -45,20 +45,14 @@ export const StoreCard: React.FC<StoreCardProps> = ({
   return (
     <Card width={width}>
       <Container>
-        <Rating value={tabelog} size={12} fontSize="12px" />
+        <Rating value={tabelog} size={12} fontSize="14px" />
         <div style={{ textAlign: 'center' }}>
           <StoreLink href={link} target="_blank" rel="noopener noreferrer">
             {name}
           </StoreLink>
-          <Price
-            lunch={lunch}
-            dinner={dinner}
-            flex={true}
-            iconSize={12}
-            fontSize="10px"
-          />
+          <Price lunch={lunch} dinner={dinner} iconSize={12} fontSize="12px" />
         </div>
-        <Rating value={google} size={12} fontSize="12px" />
+        <Rating value={google} size={12} fontSize="14px" />
       </Container>
     </Card>
   )

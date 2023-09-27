@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import foodImage from '../../../../public/sp_food.jpg'
 import { SearchBox } from '@/components/organisms/SearchBox'
+import Image from 'next/image'
+import logo from '../../../../public/logo.png'
 
 interface TopProps {
   setSearch: (value: boolean) => void
@@ -27,18 +29,9 @@ const TitleWrapper = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  text-align: center;
-`
-
-const Title = styled.h1`
-  font-size: 32px;
-  font-weight: bold;
-  color: #fff;
-`
-
-const SubTitle = styled.h2`
-  font-size: 14px;
-  color: #fff;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 `
 
 const SearchContainer = styled.div`
@@ -53,8 +46,7 @@ export const SpTop: React.FC<TopProps> = ({ setSearch }) => {
     <Container>
       <ImageContainer>
         <TitleWrapper>
-          <Title>TabeloGooglemap</Title>
-          <SubTitle>〜お店選びをもっと簡単に〜</SubTitle>
+          <Image width={220} height={220} src={logo} alt='ロゴ' priority />
         </TitleWrapper>
       </ImageContainer>
       <SearchContainer>

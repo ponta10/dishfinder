@@ -4,9 +4,12 @@ import React from 'react'
 import styled from 'styled-components'
 import GoogleMap from '../../../../public/google_maps.png'
 import { Header } from '@/components/organisms/Header/sp'
+import { Store } from '@/utils/type'
 
 interface StorePageProps {
   setSearch: (value: boolean) => void
+  items: any
+  searchParams?: URLSearchParams
 }
 
 const Container = styled.div`
@@ -15,6 +18,7 @@ const Container = styled.div`
   align-items: center;
   gap: 20px;
   margin-top: 80px;
+  margin-bottom: 40px;
 `
 
 const IconWrapper = styled.div`
@@ -31,24 +35,29 @@ const Tabelog = styled.p`
   font-weight: bold;
 `
 
-export const SpStorePage: React.FC<StorePageProps> = ({ setSearch }) => {
+export const SpStorePage: React.FC<StorePageProps> = ({
+  setSearch,
+  items,
+  searchParams,
+}) => {
+  const genre = searchParams?.get('genre')
   return (
     <div>
-      <Header setSearch={setSearch} />
+      <Header setSearch={setSearch} searchParams={searchParams} />
       <Container>
         <IconWrapper>
           <Tabelog>食べログ</Tabelog>
           <Image width={30} height={30} src={GoogleMap} alt="GoogleMap" />
         </IconWrapper>
-        {[...Array(12)].map((_, i) => (
+        {items?.[`${genre}`]?.map((value: Store, index: number) => (
           <StoreCard
-            tabelog={3.49}
-            google={4.2}
-            lunch="¥1,000~1,999"
-            dinner="¥3,000~3,999"
-            name="ホームズパスタ 渋谷店"
-            link="https://tabelog.com/tokyo/A1303/A130301/13010478/"
-            key={i}
+            tabelog={value?.score}
+            google={value?.google_rating}
+            lunch={value?.lunch}
+            dinner={value?.dinner}
+            name={value?.store_name}
+            link={value?.link}
+            key={index}
             width="90%"
           />
         ))}

@@ -1,10 +1,16 @@
+"use client"
 import React from 'react'
 import styled from 'styled-components'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { Button } from '@/components/atoms/Button'
+import { areaList, genreList } from '@/utils/const'
+import Image from 'next/image'
+import logo from '../../../public/blackLogo.png'
+import { useRouter } from 'next/navigation'
 
 interface HeaderProps {
   setSearch: (value: boolean) => void
+  searchParams?: URLSearchParams
 }
 
 const Container = styled.div`
@@ -13,11 +19,12 @@ const Container = styled.div`
   top: 0;
   left: 0;
   width: 100vw;
-  height: 60px;
+  height: 64px;
   padding: 16px;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
+  gap: 8px;
   z-index: 2;
 `
 
@@ -37,13 +44,25 @@ const SearchTextArea = styled.div`
   gap: 12px;
 `
 
-export const Header: React.FC<HeaderProps> = ({ setSearch }) => {
+export const Header: React.FC<HeaderProps> = ({ setSearch, searchParams }) => {
+  const router = useRouter()
   return (
     <Container>
+      <Image width={60} height={60} src={logo} alt='ロゴ' onClick={() => router.push('/')} style={{ cursor: 'pointer' }} priority  />
       <Wrapper onClick={() => setSearch(true)}>
         <SearchTextArea>
           <AiOutlineSearch size={24} />
-          <p>渋谷 イタリアン</p>
+          <p>
+            {
+              areaList?.find((item) => item?.code === searchParams?.get('area'))
+                ?.value
+            }{' '}
+            {
+              genreList?.find(
+                (item) => item?.code === searchParams?.get('genre')
+              )?.value
+            }
+          </p>
         </SearchTextArea>
         <Button bgcolor="transparent" textcolor="#FFA234" text="変更" />
       </Wrapper>

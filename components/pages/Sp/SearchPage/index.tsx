@@ -1,32 +1,24 @@
-import React from 'react'
+'use client'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { HiArrowLongLeft } from 'react-icons/hi2'
 import { TextField } from '@/components/atoms/TextField'
 import { Form } from '@/components/organisms/Form'
 import { z } from 'zod'
-import { Tag } from '@/components/atoms/Tag'
 import { Checkbox } from '@/components/atoms/Checkbox'
 import { Button } from '@/components/atoms/Button'
 import { Select } from '@/components/atoms/Select'
-import { customErrorMap } from '@/utils/zodHelper'
+import { customErrorMap, formSchema } from '@/utils/zodHelper'
+import { areaList, genreList, price, situation } from '@/utils/const'
+import { useRouter } from 'next/navigation'
+import { Recommend } from '@/components/organisms/Recommend'
 
 interface SearchPageProps {
   setSearch: (value: boolean) => void
+  searchParams?: URLSearchParams
 }
 
 z.setErrorMap(customErrorMap)
-
-const formSchema = z.object({
-  area: z.string(),
-  genre: z.string(),
-  min: z.string().optional(),
-  max: z.string().optional(),
-  situation: z.string().optional(),
-  isPrivate: z.boolean(),
-  isAllDrinks: z.boolean(),
-  isAllEats: z.boolean(),
-  isLunch: z.boolean(),
-})
 
 const SearchHeader = styled.div`
   position: fixed;
@@ -56,13 +48,6 @@ const RecomendText = styled.h3`
   margin-bottom: 16px;
 `
 
-const RecomendContainer = styled.div`
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  justify-content: space-between;
-`
-
 const FlexContainer = styled.div<{ $gap?: number }>`
   display: flex;
   align-items: center;
@@ -82,19 +67,45 @@ const FormContainer = styled.div`
   align-items: center;
 `
 
-export const SearchPage: React.FC<SearchPageProps> = ({ setSearch }) => {
+export const SearchPage: React.FC<SearchPageProps> = ({
+  setSearch,
+  searchParams,
+}) => {
   const checkboxSize: number = 14
   const checkboxFontSize: string = '10px'
+  const [name, setName] = useState<string>('')
+  const [area, seArea] = useState<string>(searchParams?.get('area') ?? '')
+  const [genre, setGenre] = useState<string>(searchParams?.get('genre') ?? '')
+  const [val, setVal] = useState<string>('')
+  const items = name === 'area' ? areaList : name === 'genre' ? genreList : []
+  const router = useRouter()
+
   const onSubmit = (data: any) => {
-    console.log(data)
+    data.area = area
+    data.genre = genre
+    const queryParams = new URLSearchParams(data).toString()
+
+    router.push(`/store?${queryParams}`)
   }
   return (
     <Form
       onSubmit={onSubmit}
       schema={formSchema}
-      options={{ defaultValues: { min: '', max: '', situation: '' } }}
+      options={{
+        defaultValues: {
+          area:
+            areaList?.find((item) => item?.code === searchParams?.get('area'))
+              ?.value || '',
+          genre:
+            genreList?.find((item) => item?.code === searchParams?.get('genre'))
+              ?.value || '',
+          min: searchParams?.get('min') || '',
+          max: searchParams?.get('max') || '',
+          situation: searchParams?.get('situation') || '',
+        },
+      }}
     >
-      {({ control, formState }) => (
+      {({ control, formState, setValue }) => (
         <>
           <SearchHeader>
             <HiArrowLongLeft size={24} onClick={() => setSearch(false)} />
@@ -108,6 +119,8 @@ export const SearchPage: React.FC<SearchPageProps> = ({ setSearch }) => {
                 error={!!formState.errors.area}
                 helperText={formState.errors.area?.message as string}
                 autoFocus
+                onFocus={() => setName('area')}
+                onChange={(e) => setVal(e.target.value)}
               />
               <TextField
                 name="genre"
@@ -117,25 +130,32 @@ export const SearchPage: React.FC<SearchPageProps> = ({ setSearch }) => {
                 width="100%"
                 error={!!formState.errors.genre}
                 helperText={formState.errors.genre?.message as string}
+                onFocus={() => setName('genre')}
+                onChange={(e) => setVal(e.target.value)}
               />
             </TextFieldContainer>
           </SearchHeader>
           <Container>
             <RecomendText>候補</RecomendText>
-            <RecomendContainer>
-              {[...Array(12)].map((_, i) => (
-                <Tag text="渋谷" bgcolor="#fff" key={i} />
-              ))}
-            </RecomendContainer>
+            {name && (
+              <Recommend
+                setValue={setValue}
+                name={name}
+                setArea={seArea}
+                setGenre={setGenre}
+                setName={setName}
+                items={items}
+                val={val}
+                setVal={setVal}
+                sp
+              />
+            )}
             <FormContainer>
               <FlexContainer>
                 <Select
                   name="min"
                   control={control}
-                  items={[
-                    { value: '¥1,000', label: '¥1,000' },
-                    { value: '¥2,000', label: '¥2,000' },
-                  ]}
+                  items={price}
                   width="100%"
                   error={!!formState.errors.budget}
                   helperText={formState.errors.budget?.message as string}
@@ -144,10 +164,7 @@ export const SearchPage: React.FC<SearchPageProps> = ({ setSearch }) => {
                 <Select
                   name="max"
                   control={control}
-                  items={[
-                    { value: '¥1,000', label: '¥1,000' },
-                    { value: '¥2,000', label: '¥2,000' },
-                  ]}
+                  items={price}
                   width="100%"
                   error={!!formState.errors.budget}
                   helperText={formState.errors.budget?.message as string}
@@ -156,10 +173,7 @@ export const SearchPage: React.FC<SearchPageProps> = ({ setSearch }) => {
                 <Select
                   name="situation"
                   control={control}
-                  items={[
-                    { value: '1人で', label: '1人で' },
-                    { value: 'デート', label: 'デート' },
-                  ]}
+                  items={situation}
                   width="100%"
                   error={!!formState.errors.situation}
                   helperText={formState.errors.situation?.message as string}
