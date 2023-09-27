@@ -41,7 +41,6 @@ const StyledSelect = styled.select<StyledSelectProps>`
   color: ${(props) => (props.value === '' ? 'rgba(0, 0, 0, 0.54)' : 'initial')};
 
   &:focus {
-    border-bottom: 2px solid #ffa234;
     border-color: #ffa234;
     outline: none;
     box-shadow: 0 2px 5px #ffa234;

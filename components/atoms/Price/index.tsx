@@ -7,15 +7,13 @@ import moon from '../../../public/moon.png'
 interface PriceProps {
   lunch: string
   dinner: string
-  flex?: boolean
   iconSize?: number
   fontSize?: string
 }
 
-const Container = styled.div<{ $flex?: boolean }>`
-  display: ${(props) => (props.$flex ? 'flex' : 'block')};
-  alignitems: center;
-  gap: 12px;
+const Container = styled.div`
+  display: block;
+  margin-top: 8px;
 `
 
 const Wrapper = styled.div`
@@ -23,21 +21,22 @@ const Wrapper = styled.div`
   align-items: center;
   gap: 4px;
   margin-bottom: 8px;
+  justify-content: center;
 `
 
 const Amount = styled.p<{ fontSize?: string }>`
   font-size: ${(props) => props.fontSize || '1rem'};
+  white-space: nowrap;
 `
 
 export const Price: React.FC<PriceProps> = ({
   lunch,
   dinner,
-  flex,
   iconSize,
   fontSize,
 }) => {
   return (
-    <Container $flex={flex}>
+    <Container>
       <Wrapper>
         <Image width={iconSize} height={iconSize} src={sun} alt="太陽"></Image>
         <Amount fontSize={fontSize}>{lunch}</Amount>

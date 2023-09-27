@@ -6,34 +6,47 @@ import { mediaQuery, useMediaQuery } from '@/hooks/useMediaQeury'
 import React, { useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { ResponseType } from '@/utils/type'
+import axios from 'axios'
 
 const store = () => {
   const isSp = useMediaQuery(mediaQuery.sp)
   const [search, setSearch] = useState<boolean>(false)
   const searchParams = useSearchParams()
   const [items, setItems] = useState<ResponseType>({})
+  
   useEffect(() => {
     const fetchData = async () => {
-      const area = searchParams.get('area')
-      const genre = searchParams.get('genre')
-      const min = searchParams.get('min')
-      const max = searchParams.get('max')
+      const params = {
+        prefecture: 'tokyo',
+        area: searchParams.get('area'),
+        genre: searchParams.get('genre'),
+        min_price: searchParams.get('min'),
+        max_price: searchParams.get('max'),
+        isAllDrinks: searchParams?.get('isAllDrinks') ?? '',
+        isAllEats: searchParams?.get('isAllEats') ?? '',
+        isLunch: searchParams?.get('isLunch') ?? '',
+      }
 
-      const response = await fetch(
-        `/api/store?prefecture=tokyo&area=${area}&genre=${genre}&min=${min}&max=${max}`
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}`, { params }
       )
-      const data = await response.json()
-      setItems(data)
+      setItems(response.data)
     }
 
     fetchData()
-  }, [])
+  }, [searchParams])
 
   if (isSp) {
     if (search) {
-      return <SearchPage setSearch={setSearch} />
+      return <SearchPage setSearch={setSearch} searchParams={searchParams} />
     }
-    return <SpStorePage setSearch={setSearch} />
+    return (
+      <SpStorePage
+        setSearch={setSearch}
+        items={items}
+        searchParams={searchParams}
+      />
+    )
   }
   return <StorePage items={items} searchParams={searchParams} />
 }
