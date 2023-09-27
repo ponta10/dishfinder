@@ -131,7 +131,7 @@ export const areaList: Area[] = [
 export const genreList: Genre[] = [
   { code: 'italian', value: 'イタリアン' },
   { code: 'pizza', value: 'ピザ' },
-  { code: 'pazta', value: 'パスタ' },
+  { code: 'pasta', value: 'パスタ' },
   { code: 'yakiniku', value: '焼肉' },
   { code: 'horumon', value: 'ホルモン' },
   { code: 'RC1302', value: 'ジンギスカン' },
@@ -163,7 +163,7 @@ export const genreList: Genre[] = [
   { code: 'RC9808', value: 'チーズ料理' },
   { code: 'RC9807', value: 'サラダ・野菜' },
   { code: 'washoku', value: '和食' },
-  { code: 'susho', value: '寿司' },
+  { code: 'sushi', value: '寿司' },
   { code: 'seafood', value: '海鮮' },
   { code: 'RC0105', value: 'うなぎ・あなご' },
   { code: 'tempura', value: '天ぷら' },
@@ -233,4 +233,13 @@ export const price: Price[] = [
   { value: 12, label: '¥50,000' },
 ]
 
-export const situation: Situation[] = [{ value: '12', label: '¥50,000' }]
+export const situation: Situation[] = [
+  { value: 'cond04-00-00', label: '大人数の宴会' },
+  { value: 'cond04-00-01', label: '接待' },
+  { value: 'cond04-00-02', label: '一人で入りやすい' },
+  { value: 'cond04-00-03', label: 'デート' },
+  { value: 'cond04-00-04', label: '家族・子供と' },
+  { value: 'cond04-00-05', label: '知人・友人と' },
+  { value: 'cond04-00-06', label: '女子会' },
+  { value: 'cond04-00-07', label: '合コン' },
+]

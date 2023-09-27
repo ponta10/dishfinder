@@ -9,25 +9,13 @@ import { Button } from '@/components/atoms/Button'
 import { useRouter } from 'next/navigation'
 import { Recommend } from '../Recommend'
 import { areaList, genreList, price, situation } from '@/utils/const'
-import { customErrorMap } from '@/utils/zodHelper'
+import { customErrorMap, formSchema } from '@/utils/zodHelper'
 
 z.setErrorMap(customErrorMap)
 
-const formSchema = z.object({
-  area: z.string(),
-  genre: z.string(),
-  min: z.string().optional(),
-  max: z.string().optional(),
-  situation: z.string().optional(),
-  isPrivate: z.boolean(),
-  isAllDrinks: z.boolean(),
-  isAllEats: z.boolean(),
-  isLunch: z.boolean(),
-})
-
 const Container = styled.div`
   position: fixed;
-  top: 60px;
+  top: 80px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
@@ -58,8 +46,8 @@ export const Header: React.FC<HeaderProps> = ({
   const router = useRouter()
   const labelColor = isLabelWhite ? '#fff' : '#000'
   const [name, setName] = useState<string>('')
-  const [area, seArea] = useState<string>('')
-  const [genre, setGenre] = useState<string>('')
+  const [area, seArea] = useState<string>(searchParams?.get('area') ?? '')
+  const [genre, setGenre] = useState<string>(searchParams?.get('genre') ?? '')
   const [val, setVal] = useState<string>('')
   const items = name === 'area' ? areaList : name === 'genre' ? genreList : []
   const containerRef = useRef<HTMLDivElement | null>(null)
@@ -88,6 +76,12 @@ export const Header: React.FC<HeaderProps> = ({
   const onSubmit = (data: any) => {
     data.area = area
     data.genre = genre
+    for (const key in data) {
+      if (data[key] === false) {
+        delete data[key]
+      }
+    }
+
     const queryParams = new URLSearchParams(data).toString()
 
     router.push(`/store?${queryParams}`)
@@ -99,8 +93,13 @@ export const Header: React.FC<HeaderProps> = ({
         schema={formSchema}
         options={{
           defaultValues: {
-            area: areaList?.find(item => item?.code === searchParams?.get('area'))?.value || '',
-            genre: genreList?.find(item => item?.code === searchParams?.get('genre'))?.value || '',
+            area:
+              areaList?.find((item) => item?.code === searchParams?.get('area'))
+                ?.value || '',
+            genre:
+              genreList?.find(
+                (item) => item?.code === searchParams?.get('genre')
+              )?.value || '',
             min: searchParams?.get('min') || '',
             max: searchParams?.get('max') || '',
             situation: searchParams?.get('situation') || '',
@@ -176,12 +175,12 @@ export const Header: React.FC<HeaderProps> = ({
               )}
             </FlexContainer>
             <FlexContainer $gap={24}>
-              <Checkbox
+              {/* <Checkbox
                 name="isPrivate"
                 control={control}
                 label="個室あり"
                 color={labelColor}
-              />
+              /> */}
               <Checkbox
                 name="isAllDrinks"
                 control={control}
