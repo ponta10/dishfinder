@@ -12,8 +12,8 @@ import { Spinner } from '@/components/atoms/Spinner'
 import { Error } from '@/components/pages/Error'
 
 const store = () => {
-  const width = useWindowWidth();
-  const isMobile = width <= 768;
+  const width = useWindowWidth()
+  const isMobile = width <= 768
   const [search, setSearch] = useState<boolean>(false)
   const searchParams = useSearchParams()
   const [items, setItems] = useState<ResponseType>({})

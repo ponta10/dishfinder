@@ -6,8 +6,8 @@ import { useWindowWidth } from '@/hooks/useWindowWidth'
 import { useState } from 'react'
 
 export default function Home() {
-  const width = useWindowWidth();
-  const isMobile = width <= 768;
+  const width = useWindowWidth()
+  const isMobile = width <= 768
   const [search, setSearch] = useState<boolean>(false)
   const [focus, setFocus] = useState<string>('')
 
