@@ -19,13 +19,13 @@ export const useMediaQuery = (query: string) => {
     }
 
     const handleChange = (e: MediaQueryListEvent) => {
-      setMatch(e.matches);
-    };
-    
-    mql.addEventListener('change', handleChange);
+      setMatch(e.matches)
+    }
+
+    mql.addEventListener('change', handleChange)
     return () => {
-      mql.removeEventListener('change', handleChange);
-    };
+      mql.removeEventListener('change', handleChange)
+    }
   }, [formattedQuery, match])
 
   return match
