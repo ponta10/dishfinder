@@ -21,3 +21,15 @@ export interface StoreParams {
   isAllEats?: string
   isLunch?: string
 }
+
+export interface FormParams {
+  [key: string]: string | boolean
+  area: string
+  genre: string
+  min: string
+  max: string
+  situation: string
+  isAllDrinks: boolean
+  isAllEats: boolean
+  isLunch: boolean
+}
