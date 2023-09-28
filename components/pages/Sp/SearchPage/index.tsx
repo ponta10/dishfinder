@@ -15,6 +15,7 @@ import { Recommend } from '@/components/organisms/Recommend'
 
 interface SearchPageProps {
   setSearch: (value: boolean) => void
+  focus?: string
   searchParams?: URLSearchParams
 }
 
@@ -69,10 +70,11 @@ const FormContainer = styled.div`
 
 export const SearchPage: React.FC<SearchPageProps> = ({
   setSearch,
+  focus,
   searchParams,
 }) => {
-  const checkboxSize: number = 14
-  const checkboxFontSize: string = '10px'
+  const checkboxSize: number = 16
+  const checkboxFontSize: string = '12px'
   const [name, setName] = useState<string>('')
   const [area, seArea] = useState<string>(searchParams?.get('area') ?? '')
   const [genre, setGenre] = useState<string>(searchParams?.get('genre') ?? '')
@@ -83,9 +85,15 @@ export const SearchPage: React.FC<SearchPageProps> = ({
   const onSubmit = (data: any) => {
     data.area = area
     data.genre = genre
+    for (const key in data) {
+      if (data[key] === false) {
+        delete data[key]
+      }
+    }
     const queryParams = new URLSearchParams(data).toString()
 
     router.push(`/store?${queryParams}`)
+    setSearch(false)
   }
   return (
     <Form
@@ -116,25 +124,26 @@ export const SearchPage: React.FC<SearchPageProps> = ({
               <TextField
                 name="area"
                 control={control}
-                placeholder="エリア(例: 渋谷・新宿)"
+                placeholder="エリア"
                 height={50}
                 width="100%"
                 error={!!formState.errors.area}
                 helperText={formState.errors.area?.message as string}
-                autoFocus
                 onFocus={() => setName('area')}
                 onChange={(e) => setVal(e.target.value)}
+                autoFocus={focus === 'area'}
               />
               <TextField
                 name="genre"
                 control={control}
-                placeholder="ジャンル(例: イタリアン・中華)"
+                placeholder="ジャンル"
                 height={50}
                 width="100%"
                 error={!!formState.errors.genre}
                 helperText={formState.errors.genre?.message as string}
                 onFocus={() => setName('genre')}
                 onChange={(e) => setVal(e.target.value)}
+                autoFocus={focus === 'genre'}
               />
             </TextFieldContainer>
           </SearchHeader>
@@ -162,7 +171,7 @@ export const SearchPage: React.FC<SearchPageProps> = ({
                   width="100%"
                   error={!!formState.errors.budget}
                   helperText={formState.errors.budget?.message as string}
-                  placeholder="下限予算"
+                  placeholder="💵下限"
                 />
                 <Select
                   name="max"
@@ -171,7 +180,7 @@ export const SearchPage: React.FC<SearchPageProps> = ({
                   width="100%"
                   error={!!formState.errors.budget}
                   helperText={formState.errors.budget?.message as string}
-                  placeholder="上限予算"
+                  placeholder="💵上限"
                 />
                 <Select
                   name="situation"
@@ -185,18 +194,12 @@ export const SearchPage: React.FC<SearchPageProps> = ({
               </FlexContainer>
               <FlexContainer $gap={24}>
                 <Checkbox
-                  name="isPrivate"
-                  control={control}
-                  label="個室あり"
-                  size={checkboxSize}
-                  fontSize={checkboxFontSize}
-                />
-                <Checkbox
                   name="isAllDrinks"
                   control={control}
                   label="飲み放題"
                   size={checkboxSize}
                   fontSize={checkboxFontSize}
+                  defaultChecked={searchParams?.get('isAllDrinks') === 'true'}
                 />
                 <Checkbox
                   name="isAllEats"
@@ -204,6 +207,7 @@ export const SearchPage: React.FC<SearchPageProps> = ({
                   label="食べ放題"
                   size={checkboxSize}
                   fontSize={checkboxFontSize}
+                  defaultChecked={searchParams?.get('isAllEats') === 'true'}
                 />
                 <Checkbox
                   name="isLunch"
@@ -211,6 +215,7 @@ export const SearchPage: React.FC<SearchPageProps> = ({
                   label="ランチ"
                   size={checkboxSize}
                   fontSize={checkboxFontSize}
+                  defaultChecked={searchParams?.get('isLunch') === 'true'}
                 />
               </FlexContainer>
               <Button type="submit" text="検索" bgcolor="#FFA234" width="40%" />

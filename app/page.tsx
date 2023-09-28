@@ -8,12 +8,13 @@ import { useState } from 'react'
 export default function Home() {
   const isSp = useMediaQuery(mediaQuery.sp)
   const [search, setSearch] = useState<boolean>(false)
+  const [focus, setFocus] = useState<string>('')
 
   if (isSp) {
     if (search) {
-      return <SearchPage setSearch={setSearch} />
+      return <SearchPage setSearch={setSearch} focus={focus} />
     }
-    return <SpTop setSearch={setSearch} />
+    return <SpTop setSearch={setSearch} setFocus={setFocus} />
   }
 
   return <Top />

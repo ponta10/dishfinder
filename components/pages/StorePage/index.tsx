@@ -53,6 +53,12 @@ const GenreContainer = styled.div`
   gap: 40px;
 `
 
+const NotFound = styled.p`
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+`
+
 export const StorePage: React.FC<StorePageProps> = ({
   items,
   searchParams,
@@ -82,18 +88,25 @@ export const StorePage: React.FC<StorePageProps> = ({
             {Object.keys(items).length > 1 && (
               <h2>{genreList?.find((item) => item.code === genre)?.value}</h2>
             )}
-            {items[genre].map((value: Store, i: number) => (
-              <StoreCard
-                tabelog={Number(value.score)}
-                google={Number(value.google_rating)}
-                lunch={value.lunch}
-                dinner={value.dinner}
-                name={value.store_name}
-                link={value.link}
-                key={i}
-                width="100%"
-              />
-            ))}
+            {items[genre].length === 0 ? (
+              <div>
+                <NotFound>データがありません。</NotFound>
+                <NotFound>検索条件を変えてもう一度検索してください。</NotFound>
+              </div>
+            ) : (
+              items[genre].map((value: Store, i: number) => (
+                <StoreCard
+                  tabelog={Number(value.score)}
+                  google={Number(value.google_rating)}
+                  lunch={value.lunch}
+                  dinner={value.dinner}
+                  name={value.store_name}
+                  link={value.link}
+                  key={i}
+                  width="100%"
+                />
+              ))
+            )}
           </GenreContainer>
         ))}
       </Container>

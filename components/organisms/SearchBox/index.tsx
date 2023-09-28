@@ -11,6 +11,7 @@ import { price, situation } from '@/utils/const'
 
 interface SearchBoxProps {
   setSearch: (value: boolean) => void
+  setFocus: (value: string) => void
 }
 
 z.setErrorMap(customErrorMap)
@@ -57,13 +58,16 @@ const Headline = styled.h3`
   }
 `
 
-export const SearchBox: React.FC<SearchBoxProps> = ({ setSearch }) => {
-  const onSubmit = (data: any) => {
-    console.log(data)
+export const SearchBox: React.FC<SearchBoxProps> = ({
+  setSearch,
+  setFocus,
+}) => {
+  const onSubmit = () => {
+    console.log('test')
   }
 
-  const checkboxSize: number = 14
-  const checkboxFontSize: string = '10px'
+  const checkboxSize: number = 16
+  const checkboxFontSize: string = '12px'
   return (
     <Container>
       <Form
@@ -79,22 +83,28 @@ export const SearchBox: React.FC<SearchBoxProps> = ({ setSearch }) => {
                 <TextField
                   name="area"
                   control={control}
-                  placeholder="エリア(例: 渋谷・新宿)"
+                  placeholder="エリア"
                   height={50}
                   width="100%"
                   error={!!formState.errors.area}
                   helperText={formState.errors.area?.message as string}
-                  onFocus={() => setSearch(true)}
+                  onFocus={() => {
+                    setSearch(true)
+                    setFocus('area')
+                  }}
                 />
                 <TextField
                   name="genre"
                   control={control}
-                  placeholder="ジャンル(例: イタリアン・中華)"
+                  placeholder="ジャンル"
                   height={50}
                   width="100%"
                   error={!!formState.errors.genre}
                   helperText={formState.errors.genre?.message as string}
-                  onFocus={() => setSearch(true)}
+                  onFocus={() => {
+                    setSearch(true)
+                    setFocus('genre')
+                  }}
                 />
               </FlexContainer>
               <FlexContainer>
@@ -105,7 +115,7 @@ export const SearchBox: React.FC<SearchBoxProps> = ({ setSearch }) => {
                   width="100%"
                   error={!!formState.errors.budget}
                   helperText={formState.errors.budget?.message as string}
-                  placeholder="下限予算"
+                  placeholder="💵下限"
                 />
                 <Select
                   name="max"
@@ -114,7 +124,7 @@ export const SearchBox: React.FC<SearchBoxProps> = ({ setSearch }) => {
                   width="100%"
                   error={!!formState.errors.budget}
                   helperText={formState.errors.budget?.message as string}
-                  placeholder="上限予算"
+                  placeholder="💵上限"
                 />
                 <Select
                   name="situation"
@@ -128,13 +138,6 @@ export const SearchBox: React.FC<SearchBoxProps> = ({ setSearch }) => {
               </FlexContainer>
             </div>
             <FlexContainer $gap={24}>
-              {/* <Checkbox
-                name="isPrivate"
-                control={control}
-                label="個室あり"
-                size={checkboxSize}
-                fontSize={checkboxFontSize}
-              /> */}
               <Checkbox
                 name="isAllDrinks"
                 control={control}

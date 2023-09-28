@@ -4,11 +4,12 @@ import React from 'react'
 import styled from 'styled-components'
 import GoogleMap from '../../../../public/google_maps.png'
 import { Header } from '@/components/organisms/Header/sp'
-import { Store } from '@/utils/type'
+import { ResponseType, Store } from '@/utils/type'
+import { genreList } from '@/utils/const'
 
 interface StorePageProps {
   setSearch: (value: boolean) => void
-  items: any
+  items: ResponseType
   searchParams?: URLSearchParams
 }
 
@@ -35,6 +36,20 @@ const Tabelog = styled.p`
   font-weight: bold;
 `
 
+const GenreContainer = styled.div`
+  width: 92%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+`
+
+const NotFound = styled.p`
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+`
+
 export const SpStorePage: React.FC<StorePageProps> = ({
   setSearch,
   items,
@@ -49,17 +64,31 @@ export const SpStorePage: React.FC<StorePageProps> = ({
           <Tabelog>食べログ</Tabelog>
           <Image width={30} height={30} src={GoogleMap} alt="GoogleMap" />
         </IconWrapper>
-        {items?.[`${genre}`]?.map((value: Store, index: number) => (
-          <StoreCard
-            tabelog={value?.score}
-            google={value?.google_rating}
-            lunch={value?.lunch}
-            dinner={value?.dinner}
-            name={value?.store_name}
-            link={value?.link}
-            key={index}
-            width="90%"
-          />
+        {Object.keys(items).map((genre) => (
+          <GenreContainer key={genre}>
+            {Object.keys(items).length > 1 && (
+              <h2>{genreList?.find((item) => item.code === genre)?.value}</h2>
+            )}
+            {items[genre].length === 0 ? (
+              <div>
+                <NotFound>データがありません。</NotFound>
+                <NotFound>検索条件を変えてもう一度検索してください。</NotFound>
+              </div>
+            ) : (
+              items[genre].map((value: Store, i: number) => (
+                <StoreCard
+                  tabelog={Number(value.score)}
+                  google={Number(value.google_rating)}
+                  lunch={value.lunch}
+                  dinner={value.dinner}
+                  name={value.store_name}
+                  link={value.link}
+                  key={i}
+                  width="100%"
+                />
+              ))
+            )}
+          </GenreContainer>
         ))}
       </Container>
     </div>

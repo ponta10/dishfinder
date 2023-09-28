@@ -8,6 +8,8 @@ import { useSearchParams } from 'next/navigation'
 import { ResponseType, StoreParams } from '@/utils/type'
 import axios from 'axios'
 import { genreList } from '@/utils/const'
+import { Spinner } from '@/components/atoms/Spinner'
+import { Error } from '@/components/pages/Error'
 
 const store = () => {
   const isSp = useMediaQuery(mediaQuery.sp)
@@ -15,12 +17,14 @@ const store = () => {
   const searchParams = useSearchParams()
   const [items, setItems] = useState<ResponseType>({})
 
-  const getRandomGenres = (count: number = 3): string[] => {
+  const getRandomGenres = (count: number = 2): string[] => {
     const shuffled = genreList.sort(() => 0.5 - Math.random())
     return shuffled.slice(0, count).map((genre) => genre.code)
   }
 
-  const [hasMounted, setHasMounted] = useState(false)
+  const [hasMounted, setHasMounted] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isError, setIsError] = useState<boolean>(false)
 
   useEffect(() => {
     setHasMounted(true)
@@ -42,8 +46,8 @@ const store = () => {
         prefecture: 'tokyo',
         area: searchParams.get('area') ?? '',
         genre: genres,
-        min_price: searchParams.get('min') ?? '',
-        max_price: searchParams.get('max') ?? '',
+        min_price: searchParams.get('min') || '0',
+        max_price: searchParams.get('max') || '0',
       }
 
       if (searchParams.get('isAllDrinks')) {
@@ -56,14 +60,29 @@ const store = () => {
         params.isLunch = searchParams.get('isLunch') ?? ''
       }
 
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}`, {
-        params,
-      })
-      setItems(response.data)
+      try {
+        setIsLoading(true)
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}`, {
+          params,
+        })
+        setItems(response.data)
+      } catch (err) {
+        setIsError(true)
+      } finally {
+        setIsLoading(false)
+      }
     }
 
     fetchData()
   }, [searchParams, hasMounted])
+
+  if (isLoading) {
+    return <Spinner />
+  }
+
+  if (isError) {
+    return <Error />
+  }
 
   if (isSp) {
     if (search) {

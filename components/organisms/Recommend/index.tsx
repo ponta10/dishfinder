@@ -52,7 +52,10 @@ export const Recommend: React.FC<RecommendProps> = ({
     setVal('')
   }
 
-  const filterItems = items?.filter((item) => item.value.includes(val))
+  const filterItems = items?.filter((item) => 
+  (item.value && item.value.startsWith(val)) || 
+  (item.kana && item.kana.startsWith(val))
+)
 
   return (
     <Container $sp={sp}>

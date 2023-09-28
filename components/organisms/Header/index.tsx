@@ -141,7 +141,7 @@ export const Header: React.FC<HeaderProps> = ({
                 width={150}
                 error={!!formState.errors.budget}
                 helperText={formState.errors.budget?.message as string}
-                placeholder="下限予算"
+                placeholder="予算下限"
                 onFocus={() => setName('')}
               />
               <Select
@@ -151,7 +151,7 @@ export const Header: React.FC<HeaderProps> = ({
                 width={150}
                 error={!!formState.errors.budget}
                 helperText={formState.errors.budget?.message as string}
-                placeholder="上限予算"
+                placeholder="予算上限"
                 onFocus={() => setName('')}
               />
               <Select
@@ -178,29 +178,26 @@ export const Header: React.FC<HeaderProps> = ({
               )}
             </FlexContainer>
             <FlexContainer $gap={24}>
-              {/* <Checkbox
-                name="isPrivate"
-                control={control}
-                label="個室あり"
-                color={labelColor}
-              /> */}
               <Checkbox
                 name="isAllDrinks"
                 control={control}
                 label="飲み放題"
                 color={labelColor}
+                defaultChecked={searchParams?.get('isAllDrinks') === 'true'}
               />
               <Checkbox
                 name="isAllEats"
                 control={control}
                 label="食べ放題"
                 color={labelColor}
+                defaultChecked={searchParams?.get('isAllEats') === 'true'}
               />
               <Checkbox
                 name="isLunch"
                 control={control}
                 label="ランチ"
                 color={labelColor}
+                defaultChecked={searchParams?.get('isLunch') === 'true'}
               />
             </FlexContainer>
             <Button

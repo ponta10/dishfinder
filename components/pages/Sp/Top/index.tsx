@@ -7,6 +7,7 @@ import logo from '../../../../public/logo.png'
 
 interface TopProps {
   setSearch: (value: boolean) => void
+  setFocus: (value: string) => void
 }
 
 const Container = styled.div`
@@ -41,7 +42,7 @@ const SearchContainer = styled.div`
   left: 0;
 `
 
-export const SpTop: React.FC<TopProps> = ({ setSearch }) => {
+export const SpTop: React.FC<TopProps> = ({ setSearch, setFocus }) => {
   return (
     <Container>
       <ImageContainer>
@@ -50,7 +51,7 @@ export const SpTop: React.FC<TopProps> = ({ setSearch }) => {
         </TitleWrapper>
       </ImageContainer>
       <SearchContainer>
-        <SearchBox setSearch={setSearch} />
+        <SearchBox setSearch={setSearch} setFocus={setFocus} />
       </SearchContainer>
     </Container>
   )
