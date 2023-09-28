@@ -47,7 +47,7 @@ export const SpTop: React.FC<TopProps> = ({ setSearch, setFocus }) => {
     <Container>
       <ImageContainer>
         <TitleWrapper>
-          <Image width={220} height={220} src={logo} alt="ロゴ" priority />
+          <Image width={240} height={240} src={logo} alt="ロゴ" priority />
         </TitleWrapper>
       </ImageContainer>
       <SearchContainer>
