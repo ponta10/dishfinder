@@ -13,6 +13,7 @@ export interface CheckboxProps {
   disabled?: boolean
   control: Control<any>
   color?: string
+  defaultChecked?: boolean
 }
 
 const CheckboxContainer = styled.div`
@@ -48,6 +49,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   color,
   fontSize,
   size,
+  defaultChecked,
   ...props
 }) => {
   const checkboxId = id || name
@@ -55,10 +57,15 @@ export const Checkbox: React.FC<CheckboxProps> = ({
     <Controller
       name={name}
       control={control}
-      defaultValue={false}
       render={({ field }) => (
         <CheckboxContainer>
-          <StyledCheckbox id={checkboxId} {...field} {...props} size={size} />
+          <StyledCheckbox
+            id={checkboxId}
+            {...field}
+            {...props}
+            size={size}
+            defaultChecked={defaultChecked}
+          />
           <StyledLabel htmlFor={checkboxId} color={color} fontSize={fontSize}>
             {label}
           </StyledLabel>

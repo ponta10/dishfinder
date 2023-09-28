@@ -20,7 +20,7 @@ export interface TextFieldProps {
   onFocus?: () => void
   autoFocus?: boolean
   onBlur?: () => void
-  onChange?: (e: any) => void
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const StyledInput = styled.input<{
@@ -48,6 +48,10 @@ const StyledInput = styled.input<{
     border-color: #ffa234;
     outline: none;
     box-shadow: 0 2px 5px #ffa234;
+  }
+
+  &::placeholder {
+    color: #aaa;
   }
 `
 

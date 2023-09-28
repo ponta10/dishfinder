@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { lighten, darken } from 'polished';
 
 export interface ButtonProps {
   bgcolor?: string
@@ -29,10 +30,11 @@ const StyledButton = styled.button<{
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: opacity 0.3s;
+  transition: all 0.1s;
 
   &:hover {
-    opacity: 0.8;
+    filter: brightness(105%);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
 
   &:disabled {
