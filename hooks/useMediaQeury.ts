@@ -6,27 +6,43 @@ export const mediaQuery = {
   pc: '1122px <= width',
 }
 
-export const useMediaQuery = (query: string) => {
-  const formattedQuery = `(${query})`
-  const [match, setMatch] = useState<boolean | null>(null) // 初期値をnullに設定
+export function useMediaQuery(query: string): boolean {
+  const getMatches = (query: string): boolean => {
+    // Prevents SSR issues
+    if (typeof window !== 'undefined') {
+      return window.matchMedia(`(${query})`).matches
+    }
+    return false
+  }
+
+  const [matches, setMatches] = useState<boolean>(getMatches(`(${query})`))
+
+  function handleChange() {
+    setMatches(getMatches(`(${query})`))
+  }
 
   useEffect(() => {
-    const mql = matchMedia(formattedQuery)
-    setMatch(mql.matches)
+    const matchMedia = window.matchMedia(`(${query})`)
 
-    if (mql.media === 'not all' || mql.media === 'invalid') {
-      console.error(`useMediaQuery Error: Invalid media query`)
+    // Triggered at the first client-side load and if query changes
+    handleChange()
+
+    // Listen matchMedia
+    if (matchMedia.addListener) {
+      matchMedia.addListener(handleChange)
+    } else {
+      matchMedia.addEventListener('change', handleChange)
     }
 
-    const handleChange = (e: MediaQueryListEvent) => {
-      setMatch(e.matches);
-    };
-    
-    mql.addEventListener('change', handleChange);
     return () => {
-      mql.removeEventListener('change', handleChange);
-    };
-  }, [formattedQuery, setMatch])
+      if (matchMedia.removeListener) {
+        matchMedia.removeListener(handleChange)
+      } else {
+        matchMedia.removeEventListener('change', handleChange)
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query])
 
-  return match
+  return matches
 }
