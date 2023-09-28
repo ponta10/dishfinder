@@ -2,7 +2,7 @@
 import { SearchPage } from '@/components/pages/Sp/SearchPage'
 import { SpStorePage } from '@/components/pages/Sp/StorePage'
 import { StorePage } from '@/components/pages/StorePage'
-import { mediaQuery, useMediaQuery } from '@/hooks/useMediaQeury'
+import { useWindowWidth } from '@/hooks/useWindowWidth'
 import React, { useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { ResponseType, StoreParams } from '@/utils/type'
@@ -12,7 +12,8 @@ import { Spinner } from '@/components/atoms/Spinner'
 import { Error } from '@/components/pages/Error'
 
 const store = () => {
-  const isSp = useMediaQuery(mediaQuery.sp)
+  const width = useWindowWidth();
+  const isMobile = width <= 768;
   const [search, setSearch] = useState<boolean>(false)
   const searchParams = useSearchParams()
   const [items, setItems] = useState<ResponseType>({})
@@ -84,7 +85,7 @@ const store = () => {
     return <Error />
   }
 
-  if (isSp) {
+  if (isMobile) {
     if (search) {
       return <SearchPage setSearch={setSearch} searchParams={searchParams} />
     }

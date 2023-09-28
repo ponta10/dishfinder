@@ -2,28 +2,14 @@
 import { SearchPage } from '@/components/pages/Sp/SearchPage'
 import { SpTop } from '@/components/pages/Sp/Top'
 import { Top } from '@/components/pages/Top'
-import { useState, useEffect } from 'react'
+import { useWindowWidth } from '@/hooks/useWindowWidth'
+import { useState } from 'react'
 
 export default function Home() {
-  const [width, setWidth] = useState<number>(0)
+  const width = useWindowWidth();
+  const isMobile = width <= 768;
   const [search, setSearch] = useState<boolean>(false)
   const [focus, setFocus] = useState<string>('')
-
-  useEffect(() => {
-    setWidth(window.innerWidth)
-
-    const handleResize = () => {
-      setWidth(window.innerWidth)
-    }
-
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
-
-  const isMobile = width <= 768
 
   if (isMobile) {
     if (search) {

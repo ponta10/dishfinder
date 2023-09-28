@@ -39,6 +39,9 @@ const StyledSelect = styled.select<StyledSelectProps>`
   font-size: 1rem;
   cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
   color: ${(props) => (props.value === '' ? '#aaa' : 'initial')};
+  background-color: #fff
+  -webkit-appearance: none;
+  appearance: none;
 
   &:focus {
     border-color: #ffa234;
