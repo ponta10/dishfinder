@@ -11,20 +11,21 @@ export const useMediaQuery = (query: string) => {
   const [match, setMatch] = useState<boolean | null>(null) // 初期値をnullに設定
 
   useEffect(() => {
-    const mql = window.matchMedia(formattedQuery)
+    const mql = matchMedia(formattedQuery)
     setMatch(mql.matches)
 
     if (mql.media === 'not all' || mql.media === 'invalid') {
       console.error(`useMediaQuery Error: Invalid media query`)
     }
 
-    mql.onchange = (e) => {
-      setMatch(e.matches)
-    }
-
+    const handleChange = (e: MediaQueryListEvent) => {
+      setMatch(e.matches);
+    };
+    
+    mql.addEventListener('change', handleChange);
     return () => {
-      mql.onchange = null
-    }
+      mql.removeEventListener('change', handleChange);
+    };
   }, [formattedQuery, setMatch])
 
   return match
