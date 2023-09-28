@@ -92,8 +92,13 @@ export const SearchPage: React.FC<SearchPageProps> = ({
     }
     const queryParams = new URLSearchParams(data).toString()
 
-    router.push(`/store?${queryParams}`)
-    setSearch(false)
+    try {
+      router.push(`/store?${queryParams}`)
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setSearch(false)
+    }
   }
   return (
     <Form

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Control, Controller } from 'react-hook-form'
+import { BiSolidDownArrow } from 'react-icons/bi'
 import styled from 'styled-components'
 
 export interface SelectProps {
@@ -15,6 +16,7 @@ export interface SelectProps {
   control: Control<any>
   placeholder?: string
   width?: string | number
+  height?: string | number;
   onFocus?: (event: React.ChangeEvent<HTMLSelectElement>) => void
 }
 
@@ -23,6 +25,7 @@ interface StyledSelectProps {
   $error?: boolean
   disabled?: boolean
   width?: string | number
+  height?: string | number
   value?: string | number
 }
 
@@ -31,6 +34,10 @@ const StyledSelect = styled.select<StyledSelectProps>`
     typeof props.width === 'number'
       ? `${props.width}px`
       : props.width || '100%'};
+  height: ${(props) =>
+    typeof props.height === 'number'
+        ? `${props.height}px`
+        : props.height || 'auto'};
   padding: ${(props) =>
     props.size === 'small' ? '8px' : props.size === 'large' ? '16px' : '12px'};
   border: ${(props) => (props.$error ? '1px solid red' : '1px solid #ccc')};
@@ -43,6 +50,7 @@ const StyledSelect = styled.select<StyledSelectProps>`
   appearance: none !important;
   -webkit-appearance: none !important;
   -moz-appearance: none !important;
+  background-image: none;
 
   &:focus {
     border-color: #ffa234;
@@ -62,6 +70,22 @@ const StyledHelperText = styled.div<{ $error?: boolean }>`
   margin-top: 4px;
 `
 
+const SelectWrapper = styled.div`
+  position: relative;
+  display: inline-block;
+  width: 100%;
+`;
+
+const ArrowIcon = styled(BiSolidDownArrow)`
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #aaa;
+  width: 12px;
+`;
+
 export const Select: React.FC<SelectProps> = ({
   name,
   label,
@@ -73,6 +97,7 @@ export const Select: React.FC<SelectProps> = ({
   error = false,
   helperText,
   width,
+  height,
   placeholder,
   control,
   onFocus,
@@ -80,6 +105,7 @@ export const Select: React.FC<SelectProps> = ({
   return (
     <>
       {label && <StyledLabel htmlFor={name}>{label}</StyledLabel>}
+      <SelectWrapper>
       <Controller
         name={name!}
         control={control}
@@ -97,6 +123,7 @@ export const Select: React.FC<SelectProps> = ({
             size={size}
             $error={error}
             width={width}
+            height={height}
           >
             <option value="" disabled>
               {placeholder}
@@ -109,9 +136,11 @@ export const Select: React.FC<SelectProps> = ({
           </StyledSelect>
         )}
       />
+      <ArrowIcon />
       {helperText && (
         <StyledHelperText $error={error}>{helperText}</StyledHelperText>
       )}
+      </SelectWrapper>
     </>
   )
 }

@@ -41,7 +41,7 @@ const GenreContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 40px;
+  gap: 24px;
 `
 
 const NotFound = styled.p`
