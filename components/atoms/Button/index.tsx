@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { lighten, darken } from 'polished';
 
 export interface ButtonProps {
   bgcolor?: string

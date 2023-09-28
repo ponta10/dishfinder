@@ -55,7 +55,6 @@ export const SpStorePage: React.FC<StorePageProps> = ({
   items,
   searchParams,
 }) => {
-  const genre = searchParams?.get('genre')
   return (
     <div>
       <Header setSearch={setSearch} searchParams={searchParams} />
