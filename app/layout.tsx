@@ -10,6 +10,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'TabeloGooglemap',
     description: 'お店選びをもっと簡単に',
+    url: 'https://tabelogooglemap.vercel.app/',
+    siteName: 'TabeloGooglemap',
     images: [
       {
         url: 'http://drive.google.com/uc?export=view&id=128KyC4qBy6TgkUDp6hgHxWjKImd0dq9u',
@@ -17,6 +19,8 @@ export const metadata: Metadata = {
         height: 916,
       },
     ],
+    locale: 'ja_JP',
+    type: 'website',
   },
 }
 
