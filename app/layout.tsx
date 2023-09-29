@@ -5,16 +5,16 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'TabeloGooglemap',
+  title: 'DishFinder',
   description: 'お店選びをもっと簡単に',
   openGraph: {
-    title: 'TabeloGooglemap',
+    title: 'DishFinder',
     description: 'お店選びをもっと簡単に',
-    url: 'https://tabelogooglemap.vercel.app/',
-    siteName: 'TabeloGooglemap',
+    url: 'https://www.dish-finder.com/',
+    siteName: 'DishFinder',
     images: [
       {
-        url: 'http://drive.google.com/uc?export=view&id=128KyC4qBy6TgkUDp6hgHxWjKImd0dq9u',
+        url: 'http://drive.google.com/uc?export=view&id=1hK60uEqH4MF0kLGPoxEXiS30Tag_FjNo',
         width: 1602,
         height: 916,
       },
@@ -22,6 +22,12 @@ export const metadata: Metadata = {
     locale: 'ja_JP',
     type: 'website',
   },
+  twitter: {
+    card: "summary_large_image",
+    site: "@site",
+    creator: "@creator",
+    images: "https://www.dish-finder.com/dishFind.png"
+  }
 }
 
 export default function RootLayout({
