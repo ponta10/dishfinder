@@ -16,7 +16,7 @@ export interface SelectProps {
   control: Control<any>
   placeholder?: string
   width?: string | number
-  height?: string | number;
+  height?: string | number
   onFocus?: (event: React.ChangeEvent<HTMLSelectElement>) => void
 }
 
@@ -36,8 +36,8 @@ const StyledSelect = styled.select<StyledSelectProps>`
       : props.width || '100%'};
   height: ${(props) =>
     typeof props.height === 'number'
-        ? `${props.height}px`
-        : props.height || 'auto'};
+      ? `${props.height}px`
+      : props.height || 'auto'};
   padding: ${(props) =>
     props.size === 'small' ? '8px' : props.size === 'large' ? '16px' : '12px'};
   border: ${(props) => (props.$error ? '1px solid red' : '1px solid #ccc')};
@@ -74,7 +74,7 @@ const SelectWrapper = styled.div`
   position: relative;
   display: inline-block;
   width: 100%;
-`;
+`
 
 const ArrowIcon = styled(BiSolidDownArrow)`
   position: absolute;
@@ -84,7 +84,7 @@ const ArrowIcon = styled(BiSolidDownArrow)`
   pointer-events: none;
   color: #aaa;
   width: 12px;
-`;
+`
 
 export const Select: React.FC<SelectProps> = ({
   name,
@@ -106,40 +106,40 @@ export const Select: React.FC<SelectProps> = ({
     <>
       {label && <StyledLabel htmlFor={name}>{label}</StyledLabel>}
       <SelectWrapper>
-      <Controller
-        name={name!}
-        control={control}
-        defaultValue={defaultValue}
-        render={({ field }) => (
-          <StyledSelect
-            {...field}
-            value={field.value}
-            onChange={(e) => {
-              field.onChange(e)
-              if (onChange) onChange(e)
-            }}
-            onFocus={onFocus}
-            disabled={disabled}
-            size={size}
-            $error={error}
-            width={width}
-            height={height}
-          >
-            <option value="" disabled>
-              {placeholder}
-            </option>
-            {items.map((item, index) => (
-              <option key={index} value={item.value}>
-                {item.label}
+        <Controller
+          name={name!}
+          control={control}
+          defaultValue={defaultValue}
+          render={({ field }) => (
+            <StyledSelect
+              {...field}
+              value={field.value}
+              onChange={(e) => {
+                field.onChange(e)
+                if (onChange) onChange(e)
+              }}
+              onFocus={onFocus}
+              disabled={disabled}
+              size={size}
+              $error={error}
+              width={width}
+              height={height}
+            >
+              <option value="" disabled>
+                {placeholder}
               </option>
-            ))}
-          </StyledSelect>
+              {items.map((item, index) => (
+                <option key={index} value={item.value}>
+                  {item.label}
+                </option>
+              ))}
+            </StyledSelect>
+          )}
+        />
+        <ArrowIcon />
+        {helperText && (
+          <StyledHelperText $error={error}>{helperText}</StyledHelperText>
         )}
-      />
-      <ArrowIcon />
-      {helperText && (
-        <StyledHelperText $error={error}>{helperText}</StyledHelperText>
-      )}
       </SelectWrapper>
     </>
   )
