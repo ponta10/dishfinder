@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@site",
     creator: "@creator",
-    images: "https://www.dish-finder.com/dishFind.png"
+    images: "https://www.dish-finder.com/dishFinder.png"
   }
 }
 
