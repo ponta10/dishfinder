@@ -7,6 +7,10 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'TabeloGooglemap',
   description: 'お店選びをもっと簡単に',
+  openGraph: {
+    title: 'TabeloGooglemap',
+    description: 'お店選びをもっと簡単に',
+  },
 }
 
 export default function RootLayout({
