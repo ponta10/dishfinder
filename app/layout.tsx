@@ -10,6 +10,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'TabeloGooglemap',
     description: 'お店選びをもっと簡単に',
+    images: [
+      {
+        url: 'http://drive.google.com/uc?export=view&id=128KyC4qBy6TgkUDp6hgHxWjKImd0dq9u',
+        width: 1602,
+        height: 916,
+      },
+    ],
   },
 }
 
