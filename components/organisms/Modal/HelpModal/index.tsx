@@ -5,6 +5,7 @@ import styled from 'styled-components'
 const ModalTitle = styled.h2`
   font-size: 20px;
   font-weight: bold;
+  text-align: center;
 `
 
 const Box = styled.div`
