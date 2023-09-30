@@ -23,11 +23,11 @@ export const metadata: Metadata = {
     type: 'website',
   },
   twitter: {
-    card: "summary_large_image",
-    site: "@site",
-    creator: "@creator",
-    images: "https://www.dish-finder.com/dishFinder.png"
-  }
+    card: 'summary_large_image',
+    site: '@site',
+    creator: '@creator',
+    images: 'https://www.dish-finder.com/dishFinder.png',
+  },
 }
 
 export default function RootLayout({
