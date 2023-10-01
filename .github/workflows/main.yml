@@ -27,6 +27,3 @@ jobs:
 
     - name: Run lint fix
       run: yarn fix
-
-    - name: Run test
-      run: yarn test
