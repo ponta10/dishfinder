@@ -1,6 +1,6 @@
-import '@testing-library/jest-dom'
-import 'jest-styled-components'
 import React from 'react'
+import '@testing-library/jest-dom';
+import 'jest-styled-components';
 import { render, fireEvent } from '@testing-library/react'
 import { Button } from '.'
 
