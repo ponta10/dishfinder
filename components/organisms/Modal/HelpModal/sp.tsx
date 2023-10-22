@@ -41,9 +41,9 @@ export const HelpModal = () => {
       <ModalTitle>■このサイトの特徴</ModalTitle>
       <Box>
         <ImageWrapper>
-          <StyledImage width={200} height={100} alt="比較" src="/compare.png" />
+          <StyledImage width={200} height={100} alt="比較" src="/rating.png" />
           <StyledText>
-            食べログとgoogleマップの評価が両方高いお店を表示してより良いお店を探せます。
+            複数のサービスで高評価を受けたお店を表示し、より優れたお店を探せます。
           </StyledText>
         </ImageWrapper>
         <ImageWrapper>

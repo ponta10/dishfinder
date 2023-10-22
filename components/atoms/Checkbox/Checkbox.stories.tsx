@@ -1,8 +1,6 @@
-// Checkbox.stories.tsx
-
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { Checkbox, CheckboxProps } from '.' // 適切なパスを指定してください
+import { Checkbox, CheckboxProps } from '.'
 import { useForm } from 'react-hook-form'
 
 const meta: Meta = {

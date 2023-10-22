@@ -1,6 +1,6 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { Top } from '.' // 適切なパスを指定してください
+import { Top } from '.'
 
 const meta: Meta = {
   title: 'Components/Top',

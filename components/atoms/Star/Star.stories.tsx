@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { RatingStar } from '.' // RatingStarコンポーネントの正しいパスを指定してください
+import { RatingStar } from '.'
 
 const meta: Meta = {
   title: 'Example/RatingStar',

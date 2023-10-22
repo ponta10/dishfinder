@@ -1,6 +1,6 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { Select, SelectProps } from '.' // 適切なパスを指定してください
+import { Select, SelectProps } from '.'
 import { useForm } from 'react-hook-form'
 
 const meta: Meta = {
@@ -10,7 +10,6 @@ const meta: Meta = {
     layout: 'centered',
   },
   argTypes: {
-    // ... 他の argTypes
     onChange: { action: 'changed' },
   },
 }

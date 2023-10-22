@@ -64,7 +64,6 @@ export const Header: React.FC<HeaderProps> = ({
     }
 
     if (items) {
-      // nameが存在するときのみイベントリスナーを追加
       document.addEventListener('click', handleClickOutside)
     }
 

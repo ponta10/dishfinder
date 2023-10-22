@@ -1,6 +1,6 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { Header } from '.' // 適切なパスを指定してください
+import { Header } from '.'
 
 const meta: Meta = {
   title: 'Components/Header',

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { Tag } from '.' // Tagコンポーネントの正しいパスを指定してください
+import { Tag } from '.'
 
 const meta: Meta = {
   title: 'Example/Tag',

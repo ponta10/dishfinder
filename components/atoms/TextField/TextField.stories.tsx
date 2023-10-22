@@ -1,6 +1,6 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { TextField, TextFieldProps } from '.' // 適切なパスを指定してください
+import { TextField, TextFieldProps } from '.'
 import { useForm } from 'react-hook-form'
 
 const meta: Meta = {
