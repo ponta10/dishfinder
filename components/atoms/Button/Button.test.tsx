@@ -5,12 +5,12 @@ import { render, fireEvent } from '@testing-library/react'
 import { Button } from '.'
 
 describe('<Button />', () => {
-  it('renders the button with the provided text', () => {
+  it('指定されたテキストでボタンを表示する', () => {
     const { getByText } = render(<Button text="Click me!" />)
     expect(getByText('Click me!')).toBeInTheDocument()
   })
 
-  it('calls onClick when clicked', () => {
+  it('クリック時にonClickを呼び出す', () => {
     const handleClick = jest.fn()
     const { getByText } = render(
       <Button text="Click me!" onClick={handleClick} />
@@ -19,7 +19,7 @@ describe('<Button />', () => {
     expect(handleClick).toHaveBeenCalledTimes(1)
   })
 
-  it('renders the button with the provided colors', () => {
+  it('指定された色でボタンを表示する', () => {
     const { getByText } = render(
       <Button text="Colored Button" bgcolor="#FFA234" textcolor="#fff" />
     )
