@@ -5,14 +5,14 @@ import { render } from '@testing-library/react'
 import { Price } from '.'
 
 describe('<Price />', () => {
-  it('renders the component with lunch and dinner prices', () => {
+  it('昼と夜の料金でコンポーネントをレンダリングする', () => {
     const { getByText } = render(<Price lunch="$10" dinner="$20" />)
 
     expect(getByText('$10')).toBeInTheDocument()
     expect(getByText('$20')).toBeInTheDocument()
   })
 
-  it('applies provided iconSize to the images', () => {
+  it('提供されたiconSizeを画像に適用する', () => {
     const { getAllByRole } = render(
       <Price lunch="$10" dinner="$20" iconSize={24} />
     )
@@ -24,7 +24,7 @@ describe('<Price />', () => {
     })
   })
 
-  it('applies provided fontSize to the price texts', () => {
+  it('提供されたfontSizeを料金テキストに適用する', () => {
     const { getByText } = render(
       <Price lunch="$10" dinner="$20" fontSize="1.5rem" />
     )

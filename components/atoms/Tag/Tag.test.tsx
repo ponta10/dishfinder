@@ -5,25 +5,25 @@ import 'jest-styled-components'
 import { Tag } from '.'
 
 describe('<Tag />', () => {
-  it('renders the Tag component without crashing', () => {
+  it('クラッシュせずにTagコンポーネントをレンダリングする', () => {
     const { getByText } = render(<Tag text="Sample" />)
     expect(getByText('Sample')).toBeInTheDocument()
   })
 
-  it('displays the tag with the correct background color', () => {
+  it('正しい背景色でタグを表示する', () => {
     const color = 'red'
     const { getByText } = render(<Tag text="Colored" bgcolor={color} />)
     expect(getByText('Colored')).toHaveStyleRule(`background-color: ${color}`)
   })
 
-  it('calls the onClick function when the tag is clicked', () => {
+  it('タグがクリックされたときにonClick関数を呼び出す', () => {
     const mockOnClick = jest.fn()
     const { getByText } = render(<Tag text="Clickable" onClick={mockOnClick} />)
     fireEvent.click(getByText('Clickable'))
     expect(mockOnClick).toHaveBeenCalledTimes(1)
   })
 
-  it('sets the width correctly', () => {
+  it('正しく幅を設定する', () => {
     const width = '150px'
     const { getByText } = render(<Tag text="Width" width={width} />)
     expect(getByText('Width')).toHaveStyleRule(`width: ${width}`)
