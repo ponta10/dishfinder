@@ -31,7 +31,6 @@ const StyledCheckbox = styled.input.attrs({ type: 'checkbox' })<{
   width: ${(props) => props.size || '16px'};
   height: ${(props) => props.size || '16px'};
 
-  /* チェックが付いている場合のスタイルを追加 */
   accent-color: #ffa234;
 `
 
