@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { RatingStar } from '../../atoms/Star' // RatingStarコンポーネントの正しいパスを指定してください
+import { RatingStar } from '../../atoms/Star'
 
 interface RatingProps {
   value: number

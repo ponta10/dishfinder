@@ -18,7 +18,7 @@ const config: StorybookConfig = {
     autodocs: 'tag',
   },
   webpackFinal: async (config) => {
-    config.resolve = config.resolve || {} // この行を追加
+    config.resolve = config.resolve || {}
     config.resolve.alias = {
       ...config.resolve.alias,
       '@/components': path.resolve(__dirname, '../components'),

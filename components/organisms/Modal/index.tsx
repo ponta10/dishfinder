@@ -77,7 +77,6 @@ export const Modal: React.FC<ModalProps> = ({
       document.body.style.overflow = 'auto'
     }
 
-    // cleanup function
     return () => {
       document.body.style.overflow = 'auto'
     }

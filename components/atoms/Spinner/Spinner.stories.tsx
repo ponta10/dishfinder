@@ -1,12 +1,11 @@
-import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { Header } from '.'
+import { Spinner } from '.'
 
 const meta: Meta = {
-  title: 'Components/Header',
-  component: Header,
+  title: 'Example/Spinner',
+  component: Spinner,
   parameters: {
-    layout: 'centered',
+    layout: 'fullscreen',
   },
 }
 
@@ -15,5 +14,5 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  render: () => <Header />,
+  args: {},
 }

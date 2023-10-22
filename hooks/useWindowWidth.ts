@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 
-// カスタムフック
 export const useWindowWidth = () => {
   const [width, setWidth] = useState<number>(0)
 
