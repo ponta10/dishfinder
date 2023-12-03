@@ -1,4 +1,3 @@
-// components/Map.tsx
 import React from 'react'
 import {
   GoogleMap,
@@ -13,7 +12,6 @@ type Location = {
 }
 
 export interface StoreLocation {
-  id: number
   name: string
   location: Location
 }
@@ -40,7 +38,7 @@ export const Map: React.FC<MapProps> = ({ storeLocations }) => {
         ))}
         {storeLocations.map((storeLocation, index) => (
           <InfoWindowF key={index}     position={{
-            lat: storeLocation.location.lat + 0.0015, // 緯度の値に小さな値を加える
+            lat: storeLocation.location.lat + 0.0015,
             lng: storeLocation.location.lng
           }}>
             <div>

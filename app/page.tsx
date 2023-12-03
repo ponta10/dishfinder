@@ -21,16 +21,13 @@ export default function Home() {
 
   const storeLocations: StoreLocation[] = [
     {
-      id: 1,
       name: "店舗1",
       location: { lat: -34.397, lng: 150.644 }
     },
     {
-      id: 2,
       name: "店舗2",
       location: { lat: -34.399, lng: 150.648 }
     }
-    // 他の店舗を追加
   ];
 
   return (
