@@ -9,6 +9,8 @@ import { ResponseType, Store } from '@/utils/type'
 import logo from '../../../public/blackLogo.png'
 import { useRouter } from 'next/navigation'
 import { genreList } from '@/utils/const'
+import { Map } from '@/components/organisms/Map'
+import { useExtractLocationData } from '@/hooks/useExtraLocationData'
 
 interface StorePageProps {
   items: ResponseType
@@ -64,6 +66,7 @@ export const StorePage: React.FC<StorePageProps> = ({
   searchParams,
 }) => {
   const router = useRouter()
+  const locationData = useExtractLocationData(items)
   return (
     <div>
       <LogoContainer>
@@ -78,6 +81,7 @@ export const StorePage: React.FC<StorePageProps> = ({
         />
       </LogoContainer>
       <Header searchParams={searchParams} />
+      <Map items={locationData} />
       <Container>
         <IconWrapper>
           <Tabelog>食べログ</Tabelog>

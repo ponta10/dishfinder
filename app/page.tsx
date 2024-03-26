@@ -4,7 +4,6 @@ import { SpTop } from '@/components/pages/Sp/Top'
 import { Top } from '@/components/pages/Top'
 import { useWindowWidth } from '@/hooks/useWindowWidth'
 import { useState } from 'react'
-import { Map, StoreLocation } from '../components/organisms/Map';
 
 export default function Home() {
   const width = useWindowWidth()
@@ -18,24 +17,6 @@ export default function Home() {
     }
     return <SpTop setSearch={setSearch} setFocus={setFocus} />
   }
-
-  const storeLocations: StoreLocation[] = [
-    {
-      name: "店舗1",
-      location: { lat: -34.397, lng: 150.644 }
-    },
-    {
-      name: "店舗2",
-      location: { lat: -34.399, lng: 150.648 }
-    }
-  ];
-
-  return (
-    <div>
-      <h1>飲食店の地図</h1>
-      <Map storeLocations={storeLocations} />
-    </div>
-  );
 
   return <Top />
 }
