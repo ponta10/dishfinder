@@ -5,10 +5,24 @@ export interface Store {
   lunch: string
   link: string
   google_rating: number
+  location: Location
+}
+
+export interface Location {
+  lat: number
+  lng: number
 }
 
 export interface ResponseType {
   [key: string]: Store[]
+}
+
+export interface StoreLocation {
+  store_name: string
+  location: {
+    lat: number
+    lng: number
+  }
 }
 
 export interface StoreParams {
