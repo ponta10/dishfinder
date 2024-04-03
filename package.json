@@ -10,7 +10,8 @@
     "fix": "prettier --write . && eslint --ext .ts,.tsx --ignore-path .gitignore . --fix",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test": "jest"
+    "test": "jest",
+    "prepare": "panda codegen"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.1",
@@ -45,6 +46,7 @@
     "zod": "^3.22.2"
   },
   "devDependencies": {
+    "@pandacss/dev": "^0.37.1",
     "@storybook/addon-essentials": "^7.4.3",
     "@storybook/addon-interactions": "^7.4.3",
     "@storybook/addon-links": "^7.4.3",
