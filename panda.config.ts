@@ -5,14 +5,23 @@ export default defineConfig({
   preflight: true,
 
   // Where to look for your css declarations
-  include: ["./src/**/*.{js,jsx,ts,tsx}", "./pages/**/*.{js,jsx,ts,tsx}"],
+  include: ["./components/**/*.{ts,tsx,js,jsx}", "./app/**/*.{ts,tsx,js,jsx}"],
 
   // Files to exclude
   exclude: [],
 
   // Useful for theme customization
   theme: {
-    extend: {},
+    extend: {
+      tokens: {
+        colors: {
+          base: { value: '#FFA234' },
+          link: { value: '#66a3e0' },
+          white: { value: '#fff' },
+          black: { value: '#000' },
+        }
+      }
+    },
   },
 
   // The output directory for your css system

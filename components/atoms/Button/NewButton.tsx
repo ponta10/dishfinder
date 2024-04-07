@@ -1,30 +1,31 @@
-import React from 'react';
-import { css } from '@/styled-system/css';
+import React from 'react'
+import { css } from '@/styled-system/css'
 
 export interface ButtonProps {
-  bgcolor?: string;
-  textcolor?: string;
-  text?: string;
-  width?: string | number;
-  fontSize?: string;
-  type?: 'button' | 'submit' | 'reset';
-  disabled?: boolean;
-  onClick?: () => void;
+  bgcolor?: string
+  textcolor?: string
+  text?: string
+  width?: string | number
+  fontSize?: string
+  type?: 'button' | 'submit' | 'reset'
+  disabled?: boolean
+  onClick?: () => void
 }
 
 export const Button: React.FC<ButtonProps> = ({
   text,
   bgcolor,
   textcolor,
+  fontSize,
   ...props
 }) => {
   return (
     <button
       className={css({
-        backgroundColor: bgcolor || '#FFA234',
+        backgroundColor: bgcolor,
         color: textcolor || 'white',
-        width: typeof props.width === 'number' ? `${props.width}px` : props.width || 'auto',
-        fontSize: '32px',
+        width: props.width,
+        fontSize,
         padding: '4px 16px',
         border: 'none',
         borderRadius: '4px',
@@ -43,5 +44,5 @@ export const Button: React.FC<ButtonProps> = ({
     >
       {text}
     </button>
-  );
-};
+  )
+}
