@@ -40,8 +40,8 @@ const StyledInput = styled.input<{
   padding: ${(props) =>
     props.size === 'small' ? '8px' : props.size === 'large' ? '16px' : '12px'};
   border: ${(props) => (props.$error ? '1px solid red' : '1px solid #ccc')};
-  //   border-radius: 4px;
   box-sizing: border-box;
+  background-color: #fff;
   height: 2;
   &:focus {
     border-bottom: 2px solid #ffa234;
