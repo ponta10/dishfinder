@@ -5,7 +5,7 @@ import { z } from 'zod'
 import { TextField } from '@/components/atoms/TextField'
 import { Select } from '@/components/atoms/Select'
 import { Checkbox } from '@/components/atoms/Checkbox'
-import { Button } from '@/components/atoms/Button'
+import { Button } from '@/components/atoms/Button/NewButton'
 import { useRouter } from 'next/navigation'
 import { Recommend } from '../Recommend'
 import { areaList, genreList, price, situation } from '@/utils/const'
@@ -206,6 +206,7 @@ export const Header: React.FC<HeaderProps> = ({
               type="submit"
               text="検索"
               bgcolor="#FFA234"
+              textcolor="#fff"
               width="20%"
               fontSize="20px"
             />
