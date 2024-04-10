@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation'
 import { Recommend } from '../Recommend'
 import { areaList, genreList, price, situation } from '@/utils/const'
 import { customErrorMap, formSchema } from '@/utils/zodHelper'
+import { theme } from '@/styles/theme.css'
 
 z.setErrorMap(customErrorMap)
 
@@ -205,10 +206,10 @@ export const Header: React.FC<HeaderProps> = ({
             <Button
               type="submit"
               text="検索"
-              bgcolor="#FFA234"
-              textcolor="#fff"
+              bgcolor={theme.color.primary}
+              textcolor={theme.color.white}
               width="20%"
-              fontSize="20px"
+              fontSize={theme.fontSize.xl}
             />
           </FormContainer>
         )}
