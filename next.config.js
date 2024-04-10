@@ -1,4 +1,8 @@
 /** @type {import('next').NextConfig} */
+const {
+  createVanillaExtractPlugin
+} = require('@vanilla-extract/next-plugin');
+const withVanillaExtract = createVanillaExtractPlugin();
 const nextConfig = {
   compiler: {
     // see https://styled-components.com/docs/tooling#babel-plugin for more info on the options.
@@ -9,4 +13,4 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+module.exports = withVanillaExtract(nextConfig);
