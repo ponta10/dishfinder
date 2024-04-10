@@ -27,7 +27,7 @@ const SearchHeader = styled.div`
   left: 0;
   height: 80px;
   width: 100vw;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   background-color: #fff;
   display: flex;
   align-items: center;

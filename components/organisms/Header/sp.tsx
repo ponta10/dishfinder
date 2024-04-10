@@ -21,7 +21,7 @@ const Container = styled.div`
   width: 100vw;
   height: 64px;
   padding: 16px;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
   gap: 8px;
