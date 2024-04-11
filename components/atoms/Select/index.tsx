@@ -55,7 +55,7 @@ const StyledSelect = styled.select<StyledSelectProps>`
   &:focus {
     border-color: #ffa234;
     outline: none;
-    box-shadow: 0 2px 4px rgba(255, 162, 52, .5);
+    box-shadow: 0 2px 4px rgba(255, 162, 52, 0.5);
   }
 `
 

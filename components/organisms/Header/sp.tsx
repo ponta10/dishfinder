@@ -73,7 +73,11 @@ export const Header: React.FC<HeaderProps> = ({ setSearch, searchParams }) => {
             }
           </p>
         </SearchTextArea>
-        <Button bgcolor="transparent" textcolor={theme.color.primary} text="変更" />
+        <Button
+          bgcolor="transparent"
+          textcolor={theme.color.primary}
+          text="変更"
+        />
       </Wrapper>
     </Container>
   )
