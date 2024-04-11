@@ -5,9 +5,10 @@ import { z } from 'zod'
 import { TextField } from '@/components/atoms/TextField'
 import { Select } from '@/components/atoms/Select'
 import { Checkbox } from '@/components/atoms/Checkbox'
-import { Button } from '@/components/atoms/Button'
+import { Button } from '@/components/atoms/Button/'
 import { customErrorMap, formSchema } from '@/utils/zodHelper'
 import { price, situation } from '@/utils/const'
+import { theme } from '@/styles/theme.css'
 
 interface SearchBoxProps {
   setSearch: (value: boolean) => void
@@ -163,7 +164,8 @@ export const SearchBox: React.FC<SearchBoxProps> = ({
             <Button
               type="submit"
               text="検索"
-              bgcolor="#FFA234"
+              bgcolor={theme.color.primary}
+              textcolor={theme.color.white}
               width="40%"
               onClick={() => setSearch(true)}
             />
