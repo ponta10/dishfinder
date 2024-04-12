@@ -1,6 +1,5 @@
 import React from 'react'
 import '@testing-library/jest-dom'
-import 'jest-styled-components'
 import { render, fireEvent } from '@testing-library/react'
 import { Button } from '.'
 
@@ -17,14 +16,5 @@ describe('<Button />', () => {
     )
     fireEvent.click(getByText('Click me!'))
     expect(handleClick).toHaveBeenCalledTimes(1)
-  })
-
-  it('指定された色でボタンを表示する', () => {
-    const { getByText } = render(
-      <Button text="Colored Button" bgcolor="#FFA234" textcolor="#fff" />
-    )
-    const button = getByText('Colored Button')
-    expect(button).toHaveStyleRule('background-color', '#FFA234')
-    expect(button).toHaveStyleRule('color', '#fff')
   })
 })

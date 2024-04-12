@@ -12,6 +12,7 @@ import { customErrorMap, formSchema } from '@/utils/zodHelper'
 import { areaList, genreList, price, situation } from '@/utils/const'
 import { useRouter } from 'next/navigation'
 import { Recommend } from '@/components/organisms/Recommend'
+import { theme } from '@/styles/theme.css'
 
 interface SearchPageProps {
   setSearch: (value: boolean) => void
@@ -27,7 +28,7 @@ const SearchHeader = styled.div`
   left: 0;
   height: 80px;
   width: 100vw;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   background-color: #fff;
   display: flex;
   align-items: center;
@@ -223,7 +224,13 @@ export const SearchPage: React.FC<SearchPageProps> = ({
                   defaultChecked={searchParams?.get('isLunch') === 'true'}
                 />
               </FlexContainer>
-              <Button type="submit" text="検索" bgcolor="#FFA234" width="40%" />
+              <Button
+                type="submit"
+                text="検索"
+                bgcolor={theme.color.primary}
+                textcolor={theme.color.white}
+                width="40%"
+              />
             </FormContainer>
           </Container>
         </>

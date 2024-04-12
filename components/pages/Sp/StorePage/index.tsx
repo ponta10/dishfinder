@@ -1,8 +1,6 @@
 import { StoreCard } from '@/components/organisms/StoreCard/sp'
-import Image from 'next/image'
 import React from 'react'
 import styled from 'styled-components'
-import GoogleMap from '../../../../public/google_maps.png'
 import { Header } from '@/components/organisms/Header/sp'
 import { ResponseType, Store } from '@/utils/type'
 import { genreList } from '@/utils/const'
@@ -20,20 +18,6 @@ const Container = styled.div`
   gap: 20px;
   margin-top: 80px;
   margin-bottom: 40px;
-`
-
-const IconWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 40px;
-  width: 90%;
-  box-sizing: border-box;
-`
-
-const Tabelog = styled.p`
-  font-size: 14px;
-  font-weight: bold;
 `
 
 const GenreContainer = styled.div`
@@ -59,10 +43,6 @@ export const SpStorePage: React.FC<StorePageProps> = ({
     <div>
       <Header setSearch={setSearch} searchParams={searchParams} />
       <Container>
-        <IconWrapper>
-          <Tabelog>食べログ</Tabelog>
-          <Image width={30} height={30} src={GoogleMap} alt="GoogleMap" />
-        </IconWrapper>
         {Object.keys(items).map((genre) => (
           <GenreContainer key={genre}>
             {Object.keys(items).length > 1 && (

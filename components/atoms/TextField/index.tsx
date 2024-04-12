@@ -47,7 +47,7 @@ const StyledInput = styled.input<{
     border-bottom: 2px solid #ffa234;
     border-color: #ffa234;
     outline: none;
-    box-shadow: 0 2px 5px #ffa234;
+    box-shadow: 0 2px 4px rgba(255, 162, 52, 0.5);
   }
 
   &::placeholder {

@@ -2,8 +2,9 @@
 import Image from 'next/image'
 import styled from 'styled-components'
 import logo from '../public/blackLogo.png'
-import { Button } from '@/components/atoms/Button'
+import { Button } from '@/components/atoms/Button/'
 import { useRouter } from 'next/navigation'
+import { theme } from '@/styles/theme.css'
 
 const Container = styled.div`
   width: 100vw;
@@ -29,8 +30,9 @@ function NotFoundPage() {
       <Title>404 Not Found</Title>
       <Button
         text="トップに戻る"
-        bgcolor="#ffa234"
-        fontSize="18px"
+        bgcolor={theme.color.primary}
+        textcolor={theme.color.white}
+        fontSize={theme.fontSize.lg}
         onClick={() => router.push('/')}
       />
     </Container>

@@ -7,7 +7,8 @@ import {
 } from '@react-google-maps/api'
 import { StoreLocation } from '@/utils/type'
 import styled from 'styled-components'
-import { Button } from '@/components/atoms/Button'
+import { Button } from '@/components/atoms/Button/'
+import { theme } from '@/styles/theme.css'
 
 const containerStyle = {
   width: '300px',
@@ -38,10 +39,11 @@ export const Map: React.FC<MapProps> = ({ items }) => {
   return (
     <MapContainer>
       <Button
-        bgcolor="#FFA234"
+        bgcolor={theme.color.primary}
+        textcolor={theme.color.white}
         text={map ? '地図を非表示にする' : '地図を表示する'}
         onClick={() => setMap(!map)}
-      ></Button>
+      />
       {map && items.length > 0 && (
         <GoogleMap
           mapContainerStyle={containerStyle}

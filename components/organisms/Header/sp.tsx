@@ -2,11 +2,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import { AiOutlineSearch } from 'react-icons/ai'
-import { Button } from '@/components/atoms/Button'
+import { Button } from '@/components/atoms/Button/'
 import { areaList, genreList } from '@/utils/const'
 import Image from 'next/image'
 import logo from '../../../public/blackLogo.png'
 import { useRouter } from 'next/navigation'
+import { theme } from '@/styles/theme.css'
 
 interface HeaderProps {
   setSearch: (value: boolean) => void
@@ -21,7 +22,7 @@ const Container = styled.div`
   width: 100vw;
   height: 64px;
   padding: 16px;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -72,7 +73,11 @@ export const Header: React.FC<HeaderProps> = ({ setSearch, searchParams }) => {
             }
           </p>
         </SearchTextArea>
-        <Button bgcolor="transparent" textcolor="#FFA234" text="変更" />
+        <Button
+          bgcolor="transparent"
+          textcolor={theme.color.primary}
+          text="変更"
+        />
       </Wrapper>
     </Container>
   )
